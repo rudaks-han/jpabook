@@ -45,5 +45,7 @@ public class JpaMain {
                 .getResultList();
 
         System.out.println("members.size: " + members.size());
+
+
     }
 }

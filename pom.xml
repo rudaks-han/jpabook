@@ -11,6 +11,9 @@
 
     <modules>
         <module>chapter-02</module>
+        <module>chapter-03</module>
+        <module>chapter-05</module>
+        <module>chapter-06</module>
     </modules>
 
     <properties>
@@ -26,7 +29,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.187</version>
+            <version>1.4.199</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -1,4 +1,4 @@
-package jpabook.start.typequery;
+package jpabook.start.query;
 
 import jpabook.start.Base;
 import jpabook.start.Member;
@@ -18,9 +18,11 @@ public class TypeQueryExample extends Base {
     }
 
     public static void query(EntityManager em) {
-        TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
+        TypedQuery<Member> query = em.createQuery("select m from Member m where m.name = :name", Member.class);
+        query.setParameter("name", "루닥스");
         List<Member> results = query.getResultList();
 
+        System.out.println("----------- result -----------");
         for (Member member: results) {
             System.out.println("name: " + member.getName());
         }

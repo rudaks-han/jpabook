@@ -1,7 +1,7 @@
 WITH DirectReports (ManagerID, EmployeeID, Title, DeptID, Level)
 AS
 (
--- Anchor member1 definition
+-- Anchor member definition
     SELECT e.ManagerID, e.EmployeeID, e.Title, edh.DepartmentID,
         0 AS Level
     FROM Employee AS e
@@ -9,7 +9,7 @@ AS
         ON e.EmployeeID = edh.EmployeeID AND edh.EndDate IS NULL
     WHERE ManagerID IS NULL
     UNION ALL
--- Recursive member1 definition
+-- Recursive member definition
     SELECT e.ManagerID, e.EmployeeID, e.Title, edh.DepartmentID,
         Level + 1
     FROM Employee AS e

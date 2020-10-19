@@ -7,6 +7,8 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
@@ -23,4 +25,7 @@ public class Member {
 
     @Embedded
     private Address address;
+
+    @ManyToOne
+    private Team team;
 }

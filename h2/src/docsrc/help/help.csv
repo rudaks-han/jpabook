@@ -2056,7 +2056,7 @@ JSON { bytes | string }
 A binary or character string with a RFC 8259-compliant JSON text and data format.
 JSON text is parsed into internal representation.
 Order of object members is preserved as is.
-Duplicate object member1 names are allowed.
+Duplicate object member names are allowed.
 ","
 JSON '{""id"":10,""name"":""What''s this?""}'
 JSON '[1, ' '2]';
@@ -3678,7 +3678,7 @@ To set a JSON value with ""java.lang.String"" in a PreparedStatement use a ""FOR
 Without the data format VARCHAR values are converted to a JSON string values.
 
 Order of object members is preserved as is.
-Duplicate object member1 names are allowed.
+Duplicate object member names are allowed.
 ","
 JSON
 "

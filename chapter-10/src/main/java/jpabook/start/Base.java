@@ -31,7 +31,7 @@ public class Base {
 
     public static void testSave(EntityManager em) {
         Member member = new Member();
-        member.setName("루닥스");
+        member.setName("한경만");
         member.setAge(10);
 
         Address address = new Address("seoul", "seocho", "123-123");
@@ -42,6 +42,25 @@ public class Base {
         member.setAddress(address);
 
         em.persist(member);
+
+        Member member2 = new Member();
+        member2.setName("김지훈");
+        member2.setAge(12);
+
+        em.persist(member2);
+
+        Team team = new Team("개발팀");
+        team.getMembers().add(member);
+
+        em.persist(team);
+
+        Team team2 = new Team("연구소");
+        team2.getMembers().add(member2);
+
+        em.persist(team2);
+
+        member.setTeam(team);
+        member2.setTeam(team2);
 
     }
 }

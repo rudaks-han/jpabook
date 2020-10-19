@@ -1,13 +1,13 @@
-package jpabook.start.query;
+package jpabook.start.join;
+
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import jpabook.start.Base;
 import jpabook.start.Member;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import java.util.List;
-
-public class QueryExample extends Base {
+public class InnerJoinExample extends Base {
 
     public static void main(String[] args) {
         init();
@@ -18,15 +18,14 @@ public class QueryExample extends Base {
     }
 
     public static void query(EntityManager em) {
-        Query query = em.createQuery("select m.name, m.age from Member m");
+        Query query = em.createQuery("select m from Member m inner join m.team t where t.name = :teamName");
+        query.setParameter("teamName", "개발팀");
+
         List<Member> results = query.getResultList();
 
         System.out.println("----------- result -----------");
-        for (Object o: results) {
-            Object[] result = (Object[]) o;
-            System.out.println("name: " + result[0]);
-            System.out.println("age: " + result[1]);
+        for (Member member: results) {
+            System.out.println("name: " + member.getName());
         }
     }
-
 }

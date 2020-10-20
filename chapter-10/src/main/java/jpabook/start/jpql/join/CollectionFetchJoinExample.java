@@ -1,14 +1,13 @@
-package jpabook.start.join;
+package jpabook.start.jpql.join;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import jpabook.start.Base;
-import jpabook.start.Member;
 import jpabook.start.Team;
 
-public class CollectionJoinExample extends Base {
+public class CollectionFetchJoinExample extends Base {
 
     public static void main(String[] args) {
         init();
@@ -19,14 +18,15 @@ public class CollectionJoinExample extends Base {
     }
 
     public static void query(EntityManager em) {
-        Query query = em.createQuery("select t from Team t left join t.members where t.name = :teamName");
-        query.setParameter("teamName", "개발팀");
+        System.out.println("----------- query -----------");
+        Query query = em.createQuery("select t from Team t join fetch t.members where t.name = '개발팀'");
 
         List<Team> results = query.getResultList();
 
         System.out.println("----------- result -----------");
         for (Team team: results) {
             System.out.println("name: " + team.getName());
+            System.out.println("members: " + team.getMembers().size());
         }
     }
 }

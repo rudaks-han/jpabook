@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -51,11 +52,13 @@ public class Base {
 
         Team team = new Team("개발팀");
         team.getMembers().add(member);
+        team.setCreatedDate(new Date());
 
         em.persist(team);
 
         Team team2 = new Team("연구소");
         team2.getMembers().add(member2);
+        team2.setCreatedDate(new Date());
 
         em.persist(team2);
 

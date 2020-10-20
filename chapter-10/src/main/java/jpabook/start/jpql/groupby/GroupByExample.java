@@ -1,4 +1,4 @@
-package jpabook.start.groupby;
+package jpabook.start.jpql.groupby;
 
 import java.util.List;
 import javax.persistence.EntityManager;

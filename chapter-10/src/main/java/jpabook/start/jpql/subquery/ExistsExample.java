@@ -1,13 +1,13 @@
-package jpabook.start.query;
+package jpabook.start.jpql.subquery;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 import jpabook.start.Base;
 import jpabook.start.Member;
 
-public class PagingExample extends Base {
+public class ExistsExample extends Base {
 
     public static void main(String[] args) {
         init();
@@ -18,12 +18,11 @@ public class PagingExample extends Base {
     }
 
     public static void query(EntityManager em) {
-        TypedQuery<Member> query = em.createQuery("select m from Member m order by m.name desc", Member.class);
-        query.setFirstResult(10);
-        query.setMaxResults(20);
+        Query query = em.createQuery("select m from Member m where exists (select t from m.team t where t.name = '연구소')");
 
         List<Member> results = query.getResultList();
-
+        
+        System.out.println("----------- result -----------");
         for (Member member: results) {
             System.out.println("name: " + member.getName());
         }

@@ -1,4 +1,4 @@
-package jpabook.start.query;
+package jpabook.start.jpql.query;
 
 import jpabook.start.Base;
 import jpabook.start.Member;

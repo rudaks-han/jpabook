@@ -1,11 +1,13 @@
-package jpabook.start.join;
+package jpabook.start.jpql.condition;
 
+import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 import jpabook.start.Base;
+import jpabook.start.Team;
 
-public class ThetaJoinExample extends Base {
+public class NotEmptyExample extends Base {
 
     public static void main(String[] args) {
         init();
@@ -16,11 +18,14 @@ public class ThetaJoinExample extends Base {
     }
 
     public static void query(EntityManager em) {
-        TypedQuery query = em.createQuery("select count(m) from Member m, Team t where m.name = t.name", Long.class);
+        Query query = em.createQuery("select t from Team t where t.members is not empty");
 
-        Long count = (Long) query.getSingleResult();
-
+        List<Team> results = query.getResultList();
+        
         System.out.println("----------- result -----------");
-        System.out.println(count);
+        for (Team team: results) {
+            System.out.println("name: " + team.getName());
+        }
     }
+
 }

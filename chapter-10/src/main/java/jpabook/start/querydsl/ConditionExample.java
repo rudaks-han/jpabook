@@ -1,13 +1,13 @@
 package jpabook.start.querydsl;
 
-import static jpabook.start.QMember.member;
-
-import java.util.List;
-import javax.persistence.EntityManager;
-
-import com.mysema.query.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQuery;
 import jpabook.start.Base;
 import jpabook.start.Member;
+
+import javax.persistence.EntityManager;
+import java.util.List;
+
+import static jpabook.start.QMember.member;
 
 public class ConditionExample extends Base {
 
@@ -22,15 +22,16 @@ public class ConditionExample extends Base {
     public static void query(EntityManager em) {
 
         JPAQuery query = new JPAQuery(em);
-        List<Member> results = query.from(member)
+        query.from(member)
             .where(
                 member.name.eq("한경만")
                     .and(member.age.gt(5))
                     .and(member.age.lt(50))
                     .and(member.name.contains("한경"))
                     .and(member.name.startsWith("한"))
-            )
-            .list(member);
+            );
+
+        List<Member> results = query.fetch();
 
         System.out.println("----------- result -----------");
         for (Member member: results) {

@@ -1,15 +1,13 @@
-package jpabook.start.querydsl;
+package jpabook.start.nativequery;
 
-import com.querydsl.jpa.impl.JPAQuery;
 import jpabook.start.Base;
 import jpabook.start.Member;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
-import static jpabook.start.QMember.member;
-
-public class GroupExample extends Base {
+public class NativeExample extends Base {
 
     public static void main(String[] args) {
         init();
@@ -21,15 +19,15 @@ public class GroupExample extends Base {
 
     public static void query(EntityManager em) {
 
-        JPAQuery query = new JPAQuery(em);
-        query.from(member)
-            .groupBy(member.team().name);
+        String sql = "select id, name, age, city, street, zipCode, team_id from member where id = ?";
 
-        List<Member> results = query.fetch();
+        Query nativeQuery = em.createNativeQuery(sql, Member.class)
+                .setParameter(1, 1);
+        List<Member> results = nativeQuery.getResultList();
 
         System.out.println("----------- result -----------");
         for (Member member: results) {
-            System.out.println("name: " + member.getName() + ", team: " + member.getTeam().getName());
+            System.out.println("name: " + member.getName());
         }
     }
 

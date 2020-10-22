@@ -1,14 +1,13 @@
 package jpabook.start.querydsl;
 
-import javax.persistence.EntityManager;
-
-import com.mysema.query.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQuery;
 import jpabook.start.Base;
 import jpabook.start.Member;
 
-import static jpabook.start.QMember.member;
-
+import javax.persistence.EntityManager;
 import java.util.List;
+
+import static jpabook.start.QMember.member;
 
 public class QueryDslExample extends Base {
 
@@ -23,10 +22,11 @@ public class QueryDslExample extends Base {
     public static void query(EntityManager em) {
 
         JPAQuery query = new JPAQuery(em);
-        List<Member> results = query.from(member)
+        query.from(member)
             .where(member.name.eq("한경만"))
-            .orderBy(member.name.desc())
-            .list(member);
+            .orderBy(member.name.desc());
+
+        List<Member> results = query.fetch();
 
         System.out.println("----------- result -----------");
         for (Member member: results) {

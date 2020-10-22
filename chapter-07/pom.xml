@@ -11,5 +11,11 @@
 
     <artifactId>chapter-07</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.10.Final</version>
+        </dependency>
+    </dependencies>
 </project>

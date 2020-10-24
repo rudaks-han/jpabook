@@ -14,8 +14,8 @@ insert into test values (20), (20), (10);
 > update count: 3
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- --
@@ -26,8 +26,8 @@ insert into test values (null);
 > update count: 1
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- --
@@ -41,8 +41,8 @@ insert into test values (10);
 > update count: 1
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- ----
@@ -63,8 +63,8 @@ insert into test values (20), (20), (10);
 > update count: 3
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- --
@@ -75,8 +75,8 @@ insert into test values (null);
 > update count: 1
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- --
@@ -90,8 +90,8 @@ insert into test values (10);
 > update count: 1
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- ----
@@ -112,8 +112,8 @@ insert into test values (20), (20), (10);
 > update count: 3
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- --
@@ -124,8 +124,8 @@ insert into test values (null);
 > update count: 1
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- --
@@ -139,8 +139,8 @@ insert into test values (10);
 > update count: 1
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- ----
@@ -161,8 +161,8 @@ insert into test values (20), (20), (10);
 > update count: 3
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- --
@@ -173,8 +173,8 @@ insert into test values (null);
 > update count: 1
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- --
@@ -188,8 +188,8 @@ insert into test values (10);
 > update count: 1
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- ----
@@ -210,8 +210,8 @@ insert into test values (20), (20), (10);
 > update count: 3
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- --
@@ -222,8 +222,8 @@ insert into test values (null);
 > update count: 1
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- --
@@ -237,8 +237,8 @@ insert into test values (10);
 > update count: 1
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- ----
@@ -259,8 +259,8 @@ insert into test values (20), (20), (10);
 > update count: 3
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- --
@@ -271,8 +271,8 @@ insert into test values (null);
 > update count: 1
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- --
@@ -286,8 +286,8 @@ insert into test values (10);
 > update count: 1
 
 select
-    percentile_disc(0.5) within group (order by v) d50a,
-    percentile_disc(0.5) within group (order by v desc) d50d,
+    percentile_disc(0.5) within group (team by v) d50a,
+    percentile_disc(0.5) within group (team by v desc) d50d,
     median(v) m from test;
 > D50A D50D M
 > ---- ---- ----
@@ -576,7 +576,7 @@ select median(v) from test;
 insert into test values ('-2000-01-10 10:00:00'), ('-2000-01-10 10:00:01');
 > update count: 2
 
-select percentile_cont(0.16) within group (order by v) from test;
+select percentile_cont(0.16) within group (team by v) from test;
 >> -2000-01-10 10:00:00.48
 
 drop table test;
@@ -647,7 +647,7 @@ insert into test values ('Group 2A', 10), ('Group 2A', 10), ('Group 2A', 20),
     ('Group 1X', 40), ('Group 1X', 50), ('Group 3B', null);
 > update count: 6
 
-select name, median(value) from test group by name order by name;
+select name, median(value) from test group by name team by name;
 > NAME     MEDIAN(VALUE)
 > -------- -------------
 > Group 1X 45.0
@@ -761,7 +761,7 @@ insert into test values
     ('Third', 3), ('Third', 100), ('Third', 150), ('Third', 170), ('Third', 400);
 > update count: 15
 
-select dept, median(amount) from test group by dept order by dept;
+select dept, median(amount) from test group by dept team by dept;
 > DEPT   MEDIAN(AMOUNT)
 > ------ --------------
 > First  20
@@ -769,7 +769,7 @@ select dept, median(amount) from test group by dept order by dept;
 > Third  150
 > rows (ordered): 3
 
-select dept, median(amount) filter (where amount >= 20) from test group by dept order by dept;
+select dept, median(amount) filter (where amount >= 20) from test group by dept team by dept;
 > DEPT   MEDIAN(AMOUNT) FILTER (WHERE (AMOUNT >= 20))
 > ------ --------------------------------------------
 > First  30
@@ -778,7 +778,7 @@ select dept, median(amount) filter (where amount >= 20) from test group by dept 
 > rows (ordered): 3
 
 select dept, median(amount) filter (where amount >= 20) from test
-    where (amount < 200) group by dept order by dept;
+    where (amount < 200) group by dept team by dept;
 > DEPT   MEDIAN(AMOUNT) FILTER (WHERE (AMOUNT >= 20))
 > ------ --------------------------------------------
 > First  30
@@ -797,12 +797,12 @@ insert into test values (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), 
 > update count: 14
 
 select
-    percentile_cont(0.05) within group (order by v) c05a,
-    percentile_cont(0.05) within group (order by v desc) c05d,
-    percentile_cont(0.5) within group (order by v) c50,
-    percentile_cont(0.5) within group (order by v desc) c50d,
-    percentile_cont(0.95) within group (order by v) c95a,
-    percentile_cont(0.95) within group (order by v desc) c95d,
+    percentile_cont(0.05) within group (team by v) c05a,
+    percentile_cont(0.05) within group (team by v desc) c05d,
+    percentile_cont(0.5) within group (team by v) c50,
+    percentile_cont(0.5) within group (team by v desc) c50d,
+    percentile_cont(0.95) within group (team by v) c95a,
+    percentile_cont(0.95) within group (team by v desc) c95d,
     g from test group by g;
 > C05A  C05D  C50  C50D C95A  C95D  G
 > ----- ----- ---- ---- ----- ----- -
@@ -811,12 +811,12 @@ select
 > rows: 2
 
 select
-    percentile_disc(0.05) within group (order by v) d05a,
-    percentile_disc(0.05) within group (order by v desc) d05d,
-    percentile_disc(0.5) within group (order by v) d50,
-    percentile_disc(0.5) within group (order by v desc) d50d,
-    percentile_disc(0.95) within group (order by v) d95a,
-    percentile_disc(0.95) within group (order by v desc) d95d,
+    percentile_disc(0.05) within group (team by v) d05a,
+    percentile_disc(0.05) within group (team by v desc) d05d,
+    percentile_disc(0.5) within group (team by v) d50,
+    percentile_disc(0.5) within group (team by v desc) d50d,
+    percentile_disc(0.95) within group (team by v) d95a,
+    percentile_disc(0.95) within group (team by v desc) d95d,
     g from test group by g;
 > D05A D05D D50 D50D D95A D95D G
 > ---- ---- --- ---- ---- ---- -
@@ -825,13 +825,13 @@ select
 > rows: 2
 
 select
-    percentile_disc(0.05) within group (order by v) over (partition by g order by v) d05a,
-    percentile_disc(0.05) within group (order by v desc) over (partition by g order by v) d05d,
-    percentile_disc(0.5) within group (order by v) over (partition by g order by v) d50,
-    percentile_disc(0.5) within group (order by v desc) over (partition by g order by v) d50d,
-    percentile_disc(0.95) within group (order by v) over (partition by g order by v) d95a,
-    percentile_disc(0.95) within group (order by v desc) over (partition by g order by v) d95d,
-    g, v from test order by g, v;
+    percentile_disc(0.05) within group (team by v) over (partition by g team by v) d05a,
+    percentile_disc(0.05) within group (team by v desc) over (partition by g team by v) d05d,
+    percentile_disc(0.5) within group (team by v) over (partition by g team by v) d50,
+    percentile_disc(0.5) within group (team by v desc) over (partition by g team by v) d50d,
+    percentile_disc(0.95) within group (team by v) over (partition by g team by v) d95a,
+    percentile_disc(0.95) within group (team by v desc) over (partition by g team by v) d95d,
+    g, v from test team by g, v;
 > D05A D05D D50 D50D D95A D95D G V
 > ---- ---- --- ---- ---- ---- - ---
 > 1    1    1   1    1    1    1 1
@@ -857,43 +857,43 @@ create index test_idx on test(v);
 > ok
 
 select
-    percentile_disc(0.05) within group (order by v) d05a,
-    percentile_disc(0.05) within group (order by v desc) d05d,
-    percentile_disc(0.5) within group (order by v) d50,
-    percentile_disc(0.5) within group (order by v desc) d50d,
-    percentile_disc(0.95) within group (order by v) d95a,
-    percentile_disc(0.95) within group (order by v desc) d95d
+    percentile_disc(0.05) within group (team by v) d05a,
+    percentile_disc(0.05) within group (team by v desc) d05d,
+    percentile_disc(0.5) within group (team by v) d50,
+    percentile_disc(0.5) within group (team by v desc) d50d,
+    percentile_disc(0.95) within group (team by v) d95a,
+    percentile_disc(0.95) within group (team by v desc) d95d
     from test;
 > D05A D05D D50 D50D D95A D95D
 > ---- ---- --- ---- ---- ----
 > 1    10   5   6    10   1
 > rows: 1
 
-SELECT percentile_disc(null) within group (order by v) from test;
+SELECT percentile_disc(null) within group (team by v) from test;
 >> null
 
-SELECT percentile_disc(-0.01) within group (order by v) from test;
+SELECT percentile_disc(-0.01) within group (team by v) from test;
 > exception INVALID_VALUE_2
 
-SELECT percentile_disc(1.01) within group (order by v) from test;
+SELECT percentile_disc(1.01) within group (team by v) from test;
 > exception INVALID_VALUE_2
 
-SELECT percentile_disc(v) within group (order by v) from test;
+SELECT percentile_disc(v) within group (team by v) from test;
 > exception INVALID_VALUE_2
 
 drop index test_idx;
 > ok
 
-SELECT percentile_disc(null) within group (order by v) from test;
+SELECT percentile_disc(null) within group (team by v) from test;
 >> null
 
-SELECT percentile_disc(-0.01) within group (order by v) from test;
+SELECT percentile_disc(-0.01) within group (team by v) from test;
 > exception INVALID_VALUE_2
 
-SELECT percentile_disc(1.01) within group (order by v) from test;
+SELECT percentile_disc(1.01) within group (team by v) from test;
 > exception INVALID_VALUE_2
 
-SELECT percentile_disc(v) within group (order by v) from test;
+SELECT percentile_disc(v) within group (team by v) from test;
 > exception INVALID_VALUE_2
 
 drop table test;

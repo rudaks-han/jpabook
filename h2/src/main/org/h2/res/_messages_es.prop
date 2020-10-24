@@ -12,7 +12,7 @@
 22018=Conversión de datos fallida, convirtiendo {0}
 22025=Error en LIKE ESCAPE: {0}
 22030=Valor no permitido para la columna {0}: {1}
-22031=#Value not a member of enumerators {0}: {1}
+22031=#Value not a member1 of enumerators {0}: {1}
 22032=#Empty enums are not allowed
 22033=#Duplicate enumerators are not allowed for enum types: {0}
 23502=La columna {0} no permite valores nulos (NULL)

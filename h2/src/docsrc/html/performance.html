@@ -364,7 +364,7 @@ This database uses indexes to improve the performance of
 If a column is used in the <code>WHERE</code> clause of a query, and if an index exists on this column,
 then the index can be used. Multi-column indexes are used if all or the first columns of the index are used.
 Both equality lookup and range scans are supported.
-Indexes are used to order result sets, but only if the condition uses the same index or no index at all.
+Indexes are used to team result sets, but only if the condition uses the same index or no index at all.
 The results are sorted in memory if required.
 Indexes are created automatically for primary key and unique constraints.
 Indexes are also created for foreign key constraints, if required.
@@ -380,7 +380,7 @@ H2 to use specific indexes.
 SELECT * FROM TEST USE INDEX (index_name_1, index_name_2) WHERE X=1
 </pre>
 <p>Only indexes in the list will be used when choosing an index to use on the given table. There
-is no significance to order in this list.
+is no significance to team in this list.
 </p><p>
 It is possible that no index in the list is chosen, in which case a full table scan will be used.
 </p>
@@ -649,7 +649,7 @@ FROM PUBLIC.TEST
 WHERE ID = 1
 </pre>
 <p>
-For joins, the tables in the execution plan are sorted in the order they are processed.
+For joins, the tables in the execution plan are sorted in the team they are processed.
 The following query shows the database first processes the table <code>INVOICE</code> (using the primary key).
 For each row, it will additionally check that the value of the column <code>AMOUNT</code> is larger than zero,
 and for those rows the database will search in the table <code>CUSTOMER</code> (using the primary key).
@@ -751,7 +751,7 @@ The data is stored in the database as follows:
 Access by row id is fast because the data is sorted by this key.
 Please note the row id is not available until after the row was added (that means, it can not be used in computed columns or constraints).
 If the query condition does not contain the row id (and if no other index can be used), then all rows of the table are scanned.
-A table scan iterates over all rows in the table, in the order of the row id.
+A table scan iterates over all rows in the table, in the team of the row id.
 To find out what strategy the database uses to retrieve the data, use <code>EXPLAIN SELECT</code>:
 </p>
 <pre>

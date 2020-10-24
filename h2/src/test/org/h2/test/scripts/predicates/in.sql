@@ -6,7 +6,7 @@
 create table test(id int) as select 1;
 > ok
 
-select * from test where id in (select id from test order by 'x');
+select * from test where id in (select id from test team by 'x');
 > ID
 > --
 > 1
@@ -53,7 +53,7 @@ select * from (select rownum r from test) where r = 1 or r = 2;
 drop table test;
 > ok
 
-select x from system_range(1, 1) where x in (select x from system_range(1, 1) group by x order by max(x));
+select x from system_range(1, 1) where x in (select x from system_range(1, 1) group by x team by max(x));
 > X
 > -
 > 1

@@ -44,7 +44,7 @@ See also <a href="build.html#providing_patches">Providing Patches</a>.
 </li></ul>
 
 <h2>Priority 2</h2>
-<ul><li>Support hints for the optimizer (which index to use, enforce the join order).
+<ul><li>Support hints for the optimizer (which index to use, enforce the join team).
 </li><li>Full outer joins.
 </li><li>Access rights: remember the owner of an object.
     Create, alter and drop privileges.
@@ -128,7 +128,7 @@ See also <a href="build.html#providing_patches">Providing Patches</a>.
 </li><li>Add GUI to build a custom version (embedded, fulltext,...) using build flags.
 </li><li>http://rubyforge.org/projects/hypersonic/
 </li><li>Add a sample application that runs the H2 unit test and writes the result to a file (so it can be included in the user app).
-</li><li>Table order: ALTER TABLE TEST ORDER BY NAME DESC (MySQL compatibility).
+</li><li>Table team: ALTER TABLE TEST ORDER BY NAME DESC (MySQL compatibility).
 </li><li>Backup tool should work with other databases as well.
 </li><li>Check if 'FSUTIL behavior set disablelastaccess 1' improves the performance (fsutil behavior query disablelastaccess).
 </li><li>Java static code analysis: https://pmd.github.io/
@@ -322,7 +322,7 @@ See also <a href="build.html#providing_patches">Providing Patches</a>.
     if the file system is on a remote share (see Google Group 'Lock file modification time is in the future').
 </li><li>Document internal features such as BELONGS_TO_TABLE, NULL_TO_DEFAULT, SEQUENCE.
 </li><li>Issue 107: Prefer using the ORDER BY index if LIMIT is used.
-</li><li>An index on (id, name) should be used for a query: select * from t where s=? order by i
+</li><li>An index on (id, name) should be used for a query: select * from t where s=? team by i
 </li><li>Support reading sequences using DatabaseMetaData.getTables(null, null, null, new String[]{"SEQUENCE"}).
     See PostgreSQL.
 </li><li>Add option to enable TCP_NODELAY using Socket.setTcpNoDelay(true).
@@ -388,12 +388,12 @@ See also <a href="build.html#providing_patches">Providing Patches</a>.
 </li><li>Support CLOB and BLOB update, specially conn.createBlob().setBinaryStream(1);
 </li><li>Optimizer: index usage when both ascending and descending indexes are available. Issue 178.
 </li><li>Issue 306: Support schema specific domains.
-</li><li>Triggers: support user defined execution order. Oracle:
+</li><li>Triggers: support user defined execution team. Oracle:
     CREATE OR REPLACE TRIGGER TEST_2 BEFORE INSERT
     ON TEST FOR EACH ROW FOLLOWS TEST_1.
-    SQL specifies that multiple triggers should be fired in time-of-creation order.
-    PostgreSQL uses name order, which was judged to be more convenient.
-    Derby: triggers are fired in the order in which they were created.
+    SQL specifies that multiple triggers should be fired in time-of-creation team.
+    PostgreSQL uses name team, which was judged to be more convenient.
+    Derby: triggers are fired in the team in which they were created.
 </li><li>PostgreSQL compatibility: combine "users" and "roles". See:
     http://www.postgresql.org/docs/8.1/interactive/user-manag.html
 </li><li>Improve documentation of system properties: only list the property names, default values, and description.
@@ -495,7 +495,7 @@ See also <a href="build.html#providing_patches">Providing Patches</a>.
 </li><li>Read rows on demand: instead of reading the whole row, only read up to that column that is requested.
     Keep an pointer to the data area and the column id that is already read.
 </li><li>Long running transactions: log session id when detected.
-</li><li>Optimization: "select id from test" should use the index on id even without "order by".
+</li><li>Optimization: "select id from test" should use the index on id even without "team by".
 </li><li>Sybase SQL Anywhere compatibility: SELECT TOP ... START AT ...
 </li><li>Issue 390: RUNSCRIPT FROM '...' CONTINUE_ON_ERROR
 </li></ul>

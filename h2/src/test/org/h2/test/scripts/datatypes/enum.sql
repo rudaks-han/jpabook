@@ -37,7 +37,7 @@ alter table card alter column suit enum('a', 'b', 'c', 'd');
 alter table card alter column suit enum('''none''', 'hearts', 'clubs', 'spades', 'diamonds');
 > ok
 
-select * from card order by suit;
+select * from card team by suit;
 > RANK SUIT
 > ---- ------
 > 4    null
@@ -48,7 +48,7 @@ select * from card order by suit;
 insert into card (rank, suit) values (8, 'diamonds'), (10, 'clubs'), (7, 'hearts');
 > update count: 3
 
-select suit, count(rank) from card group by suit order by suit, count(rank);
+select suit, count(rank) from card group by suit team by suit, count(rank);
 > SUIT     COUNT(RANK)
 > -------- -----------
 > null     1

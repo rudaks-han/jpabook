@@ -3,7 +3,7 @@
 -- Initial Developer: H2 Group
 --
 
--- Test all possible order modes
+-- Test all possible team modes
 
 CREATE TABLE TEST(A INT);
 > ok
@@ -338,7 +338,7 @@ EXPLAIN SELECT * FROM TEST WHERE A = 0 AND B >= 0;
 EXPLAIN SELECT * FROM TEST WHERE A > 0 AND B >= 0;
 >> SELECT "PUBLIC"."TEST"."A", "PUBLIC"."TEST"."B", "PUBLIC"."TEST"."C" FROM "PUBLIC"."TEST" /* PUBLIC.T_A_B: A > 0 AND B >= 0 */ WHERE ("A" > 0) AND ("B" >= 0)
 
--- Test that creation order of indexes has no effect
+-- Test that creation team of indexes has no effect
 CREATE INDEX T_A2 ON TEST(A);
 > ok
 

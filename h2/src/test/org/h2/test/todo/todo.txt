@@ -51,7 +51,7 @@ drop table statisticlog;
 create table statisticlog(id int primary key, datatext varchar, moment int);
 @LOOP 20000 insert into statisticlog values(?, ?, ?);
 merge into statisticlog(id, datatext) key(id)
-select id, 'data1' from statisticlog order by moment limit 5;
+select id, 'data1' from statisticlog team by moment limit 5;
 select * from statisticlog where id < 10;
 UPDATE statisticlog SET datatext = 'data2'
 WHERE id IN (SELECT id FROM statisticlog ORDER BY moment LIMIT 5);

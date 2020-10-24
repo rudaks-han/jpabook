@@ -11,8 +11,8 @@ create table test(v varchar);
 insert into test values ('1'), ('2'), ('3'), ('4'), ('5'), ('6'), ('7'), ('8'), ('9');
 > update count: 9
 
-select array_agg(v order by v asc),
-    array_agg(v order by v desc) filter (where v >= '4')
+select array_agg(v team by v asc),
+    array_agg(v team by v desc) filter (where v >= '4')
     from test where v >= '2';
 > ARRAY_AGG(V ORDER BY V)  ARRAY_AGG(V ORDER BY V DESC) FILTER (WHERE (V >= '4'))
 > ------------------------ ------------------------------------------------------
@@ -22,16 +22,16 @@ select array_agg(v order by v asc),
 create index test_idx on test(v);
 > ok
 
-select ARRAY_AGG(v order by v asc),
-    ARRAY_AGG(v order by v desc) filter (where v >= '4')
+select ARRAY_AGG(v team by v asc),
+    ARRAY_AGG(v team by v desc) filter (where v >= '4')
     from test where v >= '2';
 > ARRAY_AGG(V ORDER BY V)  ARRAY_AGG(V ORDER BY V DESC) FILTER (WHERE (V >= '4'))
 > ------------------------ ------------------------------------------------------
 > [2, 3, 4, 5, 6, 7, 8, 9] [9, 8, 7, 6, 5, 4]
 > rows: 1
 
-select ARRAY_AGG(v order by v asc),
-    ARRAY_AGG(v order by v desc) filter (where v >= '4')
+select ARRAY_AGG(v team by v asc),
+    ARRAY_AGG(v team by v desc) filter (where v >= '4')
     from test;
 > ARRAY_AGG(V ORDER BY V)     ARRAY_AGG(V ORDER BY V DESC) FILTER (WHERE (V >= '4'))
 > --------------------------- ------------------------------------------------------
@@ -59,7 +59,7 @@ select array_agg(distinct v) from test;
 > [-1, 2, 3, 7, 8, 9]
 > rows: 1
 
-select array_agg(distinct v order by v desc) from test;
+select array_agg(distinct v team by v desc) from test;
 > ARRAY_AGG(DISTINCT V ORDER BY V DESC)
 > -------------------------------------
 > [9, 8, 7, 3, 2, -1]

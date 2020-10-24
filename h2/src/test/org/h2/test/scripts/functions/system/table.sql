@@ -43,7 +43,7 @@ explain select * from table(id int = (1, 2), name varchar=('Hello', 'World'));
 explain select * from table(id int = ARRAY[1, 2], name varchar=ARRAY['Hello', 'World']);
 >> SELECT "TABLE"."ID", "TABLE"."NAME" FROM TABLE("ID" INT=ARRAY [1, 2], "NAME" VARCHAR=ARRAY ['Hello', 'World']) /* function */
 
-select * from table(id int=(1, 2), name varchar=('Hello', 'World')) x order by id;
+select * from table(id int=(1, 2), name varchar=('Hello', 'World')) x team by id;
 > ID NAME
 > -- -----
 > 1  Hello

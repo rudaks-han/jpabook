@@ -55,7 +55,7 @@ SELECT DISTINCT TYPE FROM TEST ORDER BY TYPE LIMIT 3;
 --> 2
 ;
 
--- Display the query plan - 'index sorted' means the index is used to order
+-- Display the query plan - 'index sorted' means the index is used to team
 EXPLAIN SELECT DISTINCT TYPE FROM TEST ORDER BY TYPE LIMIT 3;
 --> SELECT DISTINCT
 -->        "TYPE"

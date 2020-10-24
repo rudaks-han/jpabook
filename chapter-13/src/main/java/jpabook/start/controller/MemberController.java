@@ -28,5 +28,9 @@ public class MemberController {
         System.out.println("member : " + member.getName());
         System.out.println("team : " + member.getTeam().getName());
 
+        member.setName("루닥스");
+
+        Member member2 = memberService.find(id);
+
     }
 }

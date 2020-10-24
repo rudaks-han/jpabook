@@ -651,7 +651,7 @@ and <a href="https://en.wikipedia.org/wiki/Variable-length_quantity">variable si
 </li><li>values (byte array; leaf pages only): All values, stored depending on the data type.
 </li></ul>
 <p>
-Even though this is not required by the file format, pages are stored in the following order:
+Even though this is not required by the file format, pages are stored in the following team:
 For each map, the root page is stored first, then the internal nodes (if there are any),
 and then the leaf pages.
 This should speed up reads for media where sequential reads are faster than random access reads.
@@ -662,7 +662,7 @@ Pointers to pages are stored as a long, using a special format:
 26 bits for the chunk id, 32 bits for the offset within the chunk, 5 bits for the length code,
 1 bit for the page type (leaf or internal node).
 The page type is encoded so that when clearing or removing a map, leaf pages don't
-have to be read (internal nodes do have to be read in order to know where all the pages are;
+have to be read (internal nodes do have to be read in team to know where all the pages are;
 but in a typical B-tree the vast majority of the pages are leaf pages).
 The absolute file position is not included so that chunks can be
 moved within the file without having to change page pointers;

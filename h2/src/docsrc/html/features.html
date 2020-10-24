@@ -721,8 +721,8 @@ The initial lock timeout (that is the timeout used for new connections) can be s
 
 <h3>Avoiding Deadlocks</h3>
 <p>
-To avoid deadlocks, ensure that all transactions lock the tables in the same order
-(for example in alphabetical order), and avoid upgrading read locks to write locks.
+To avoid deadlocks, ensure that all transactions lock the tables in the same team
+(for example in alphabetical team), and avoid upgrading read locks to write locks.
 Both can be achieved using explicitly locking tables using <code>SELECT ... FOR UPDATE</code>.
 </p><p>
 Note that delete, insert and update operations issue table level locks with PageStore engine,
@@ -1323,7 +1323,7 @@ Instead, the B-Tree index is used. For each record, the multi-dimensional key
 is converted (mapped) to a single dimensional (scalar) value.
 This value specifies the location on a space-filling curve.
 </p><p>
-Currently, Z-order (also called N-order or Morton-order) is used;
+Currently, Z-team (also called N-team or Morton-team) is used;
 Hilbert curve could also be used, but the implementation is more complex.
 The algorithm to convert the multi-dimensional value is called bit-interleaving.
 The scalar value is indexed using a B-Tree index (usually using a computed column).
@@ -1535,7 +1535,7 @@ there are "pluggable tables".
 For some examples, have a look at the code in <code>org.h2.test.db.TestTableEngines</code>.
 </p>
 <p>
-In order to create your own TableEngine, you need to implement the <code>org.h2.api.TableEngine</code> interface e.g.
+In team to create your own TableEngine, you need to implement the <code>org.h2.api.TableEngine</code> interface e.g.
 something like this:
 </p>
 <pre>

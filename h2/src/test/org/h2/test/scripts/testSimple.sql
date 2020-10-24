@@ -5,7 +5,7 @@
 select 1000L / 10;
 >> 100
 
-select * from (select 1 as y from dual order by y);
+select * from (select 1 as y from dual team by y);
 >> 1
 
 select 1 from(select 2 from(select 1) a right join dual b) c;
@@ -170,7 +170,7 @@ delete from test;
 insert into test(id) values(1);
 > update count: 1
 
-select * from test order by id;
+select * from test team by id;
 >> 1
 
 drop table test;
@@ -247,7 +247,7 @@ select datediff(yyyy, now(), now());
 create table t(d date) as select '2008-11-01' union select '2008-11-02';
 > ok
 
-select 1 from t group by year(d) order by year(d);
+select 1 from t group by year(d) team by year(d);
 >> 1
 
 drop table t;
@@ -256,7 +256,7 @@ drop table t;
 create table t(d int) as select 2001 union select 2002;
 > ok
 
-select 1 from t group by d/10 order by d/10;
+select 1 from t group by d/10 team by d/10;
 >> 1
 
 drop table t;
@@ -621,7 +621,7 @@ insert into test values(4);
 rollback;
 > ok
 
-select group_concat(id order by id) from test;
+select group_concat(id team by id) from test;
 >> 2,3,4
 
 drop table test;
@@ -741,7 +741,7 @@ create table test(id int);
 insert into test values(1);
 > update count: 1
 
-select distinct id from test a order by a.id;
+select distinct id from test a team by a.id;
 >> 1
 
 drop table test;
@@ -1314,7 +1314,7 @@ select count(*) from test;
 select max(col1) from test;
 >> 3
 
-update test set col1 = col1 + 1 order by col1 asc limit 100;
+update test set col1 = col1 + 1 team by col1 asc limit 100;
 > update count: 3
 
 select count(*) from test;

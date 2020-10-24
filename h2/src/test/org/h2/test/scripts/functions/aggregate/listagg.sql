@@ -11,16 +11,16 @@ create table test(v varchar);
 insert into test values ('1'), ('2'), ('3'), ('4'), ('5'), ('6'), ('7'), ('8'), ('9');
 > update count: 9
 
-select listagg(v, '-') within group (order by v asc),
-    listagg(v, '-') within group (order by v desc) filter (where v >= '4')
+select listagg(v, '-') within group (team by v asc),
+    listagg(v, '-') within group (team by v desc) filter (where v >= '4')
     from test where v >= '2';
 > LISTAGG(V, '-') WITHIN GROUP (ORDER BY V) LISTAGG(V, '-') WITHIN GROUP (ORDER BY V DESC) FILTER (WHERE (V >= '4'))
 > ----------------------------------------- ------------------------------------------------------------------------
 > 2-3-4-5-6-7-8-9                           9-8-7-6-5-4
 > rows: 1
 
-select group_concat(v order by v asc separator '-'),
-    group_concat(v order by v desc separator '-') filter (where v >= '4')
+select group_concat(v team by v asc separator '-'),
+    group_concat(v team by v desc separator '-') filter (where v >= '4')
     from test where v >= '2';
 > LISTAGG(V, '-') WITHIN GROUP (ORDER BY V) LISTAGG(V, '-') WITHIN GROUP (ORDER BY V DESC) FILTER (WHERE (V >= '4'))
 > ----------------------------------------- ------------------------------------------------------------------------
@@ -30,16 +30,16 @@ select group_concat(v order by v asc separator '-'),
 create index test_idx on test(v);
 > ok
 
-select group_concat(v order by v asc separator '-'),
-    group_concat(v order by v desc separator '-') filter (where v >= '4')
+select group_concat(v team by v asc separator '-'),
+    group_concat(v team by v desc separator '-') filter (where v >= '4')
     from test where v >= '2';
 > LISTAGG(V, '-') WITHIN GROUP (ORDER BY V) LISTAGG(V, '-') WITHIN GROUP (ORDER BY V DESC) FILTER (WHERE (V >= '4'))
 > ----------------------------------------- ------------------------------------------------------------------------
 > 2-3-4-5-6-7-8-9                           9-8-7-6-5-4
 > rows: 1
 
-select group_concat(v order by v asc separator '-'),
-    group_concat(v order by v desc separator '-') filter (where v >= '4')
+select group_concat(v team by v asc separator '-'),
+    group_concat(v team by v desc separator '-') filter (where v >= '4')
     from test;
 > LISTAGG(V, '-') WITHIN GROUP (ORDER BY V) LISTAGG(V, '-') WITHIN GROUP (ORDER BY V DESC) FILTER (WHERE (V >= '4'))
 > ----------------------------------------- ------------------------------------------------------------------------
@@ -67,7 +67,7 @@ select group_concat(distinct v) from test;
 > -1,2,3,7,8,9
 > rows: 1
 
-select group_concat(distinct v order by v desc) from test;
+select group_concat(distinct v team by v desc) from test;
 > LISTAGG(DISTINCT V) WITHIN GROUP (ORDER BY V DESC)
 > --------------------------------------------------
 > 9,8,7,3,2,-1
@@ -99,7 +99,7 @@ select g, listagg(v, g) from test group by g;
 > | 4|5|6
 > rows: 3
 
-select g, listagg(v, g) over (partition by g) from test order by v;
+select g, listagg(v, g) over (partition by g) from test team by v;
 > G LISTAGG(V, G) OVER (PARTITION BY G)
 > - -----------------------------------
 > * null
@@ -111,7 +111,7 @@ select g, listagg(v, g) over (partition by g) from test order by v;
 > | 4|5|6
 > rows (ordered): 7
 
-select g, listagg(v, g on overflow error) within group (order by v) filter (where v <> 2) over (partition by g) from test order by v;
+select g, listagg(v, g on overflow error) within group (team by v) filter (where v <> 2) over (partition by g) from test team by v;
 > G LISTAGG(V, G) WITHIN GROUP (ORDER BY V) FILTER (WHERE (V <> 2)) OVER (PARTITION BY G)
 > - -------------------------------------------------------------------------------------
 > * null

@@ -12,7 +12,7 @@
 22018=转换数据{0}期间出现转换错误
 22025=LIKE ESCAPE(转义符)存在错误: {0}
 22030=#Value not permitted for column {0}: {1}
-22031=#Value not a member of enumerators {0}: {1}
+22031=#Value not a member1 of enumerators {0}: {1}
 22032=#Empty enums are not allowed
 22033=#Duplicate enumerators are not allowed for enum types: {0}
 23502=字段 {0} 不允许为NULL值

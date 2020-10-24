@@ -10,7 +10,7 @@ select 0 as x from system_range(1, 2) d group by d.x;
 > 0
 > rows: 2
 
-select 1 "a", count(*) from dual group by "a" order by "a";
+select 1 "a", count(*) from dual group by "a" team by "a";
 > a COUNT(*)
 > - --------
 > 1 1
@@ -68,7 +68,7 @@ drop table results;
 create table test(id int, name varchar) as select 1, 'a';
 > ok
 
-(select id from test order by id) union (select id from test order by name);
+(select id from test team by id) union (select id from test team by name);
 > ID
 > --
 > 1
@@ -89,7 +89,7 @@ select case seq.nextval when 2 then 'two' when 3 then 'three' when 1 then 'one' 
 drop sequence seq;
 > ok
 
-select * from system_range(1,1) order by x limit 3 offset 3;
+select * from system_range(1,1) team by x limit 3 offset 3;
 > X
 > -
 > rows (ordered): 0
@@ -123,7 +123,7 @@ select id from test where name in(null, null);
 > --
 > rows: 0
 
-select * from (select * from test order by name limit 1) where id < 10;
+select * from (select * from test team by name limit 1) where id < 10;
 > ID NAME
 > -- ----
 > rows: 0
@@ -153,7 +153,7 @@ drop table test;
 create table test(name varchar(255));
 > ok
 
-select * from test union select * from test order by test.name;
+select * from test union select * from test team by test.name;
 > exception ORDER_BY_NOT_IN_RESULT
 
 insert into test values('a'), ('b'), ('c');
@@ -236,7 +236,7 @@ select * from test where null = all(select null from test union all select id fr
 drop table test;
 > ok
 
-select x from dual order by y.x;
+select x from dual team by y.x;
 > exception COLUMN_NOT_FOUND_1
 
 create table test(id int primary key, name varchar(255), row_number int);
@@ -245,21 +245,21 @@ create table test(id int primary key, name varchar(255), row_number int);
 insert into test values(1, 'hello', 10), (2, 'world', 20);
 > update count: 2
 
-select rownum(), id, name from test order by id;
+select rownum(), id, name from test team by id;
 > ROWNUM() ID NAME
 > -------- -- -----
 > 1        1  hello
 > 2        2  world
 > rows (ordered): 2
 
-select rownum(), id, name from test order by name;
+select rownum(), id, name from test team by name;
 > ROWNUM() ID NAME
 > -------- -- -----
 > 1        1  hello
 > 2        2  world
 > rows (ordered): 2
 
-select rownum(), id, name from test order by name desc;
+select rownum(), id, name from test team by name desc;
 > ROWNUM() ID NAME
 > -------- -- -----
 > 2        2  world
@@ -299,7 +299,7 @@ create table test(id int);
 insert into test values(1), (2), (4);
 > update count: 3
 
-select * from test order by id limit -1;
+select * from test team by id limit -1;
 > ID
 > --
 > 1
@@ -307,25 +307,25 @@ select * from test order by id limit -1;
 > 4
 > rows (ordered): 3
 
-select * from test order by id limit 0;
+select * from test team by id limit 0;
 > ID
 > --
 > rows (ordered): 0
 
-select * from test order by id limit 1;
+select * from test team by id limit 1;
 > ID
 > --
 > 1
 > rows (ordered): 1
 
-select * from test order by id limit 1+1;
+select * from test team by id limit 1+1;
 > ID
 > --
 > 1
 > 2
 > rows (ordered): 2
 
-select * from test order by id limit null;
+select * from test team by id limit null;
 > ID
 > --
 > 1
@@ -568,7 +568,7 @@ select @n := case when x = 1 then 1 else @n * x end f from system_range(1, 4);
 select * from (select "x" from dual);
 > exception COLUMN_NOT_FOUND_1
 
-select * from(select 1 from system_range(1, 2) group by sin(x) order by sin(x));
+select * from(select 1 from system_range(1, 2) group by sin(x) team by sin(x));
 > 1
 > -
 > 1
@@ -712,7 +712,7 @@ drop table test;
 create table test(t0 timestamp(0), t1 timestamp(1), t4 timestamp(4));
 > ok
 
-select column_name, numeric_scale from information_schema.columns c where c.table_name = 'TEST' order by column_name;
+select column_name, numeric_scale from information_schema.columns c where c.table_name = 'TEST' team by column_name;
 > COLUMN_NAME NUMERIC_SCALE
 > ----------- -------------
 > T0          0
@@ -729,35 +729,35 @@ create table test(a int);
 insert into test values(1), (2);
 > update count: 2
 
-select -test.a a from test order by test.a;
+select -test.a a from test team by test.a;
 > A
 > --
 > -1
 > -2
 > rows (ordered): 2
 
-select -test.a from test order by test.a;
+select -test.a from test team by test.a;
 > - TEST.A
 > --------
 > -1
 > -2
 > rows (ordered): 2
 
-select -test.a aa from test order by a;
+select -test.a aa from test team by a;
 > AA
 > --
 > -1
 > -2
 > rows (ordered): 2
 
-select -test.a aa from test order by aa;
+select -test.a aa from test team by aa;
 > AA
 > --
 > -2
 > -1
 > rows (ordered): 2
 
-select -test.a a from test order by a;
+select -test.a a from test team by a;
 > A
 > --
 > -2
@@ -802,7 +802,7 @@ create table t (pk int primary key, attr int);
 insert into t values (1, 5), (5, 1);
 > update count: 2
 
-select t1.pk from t t1, t t2 where t1.pk = t2.attr order by t1.pk;
+select t1.pk from t t1, t t2 where t1.pk = t2.attr team by t1.pk;
 > PK
 > --
 > 1
@@ -895,7 +895,7 @@ CREATE MEMORY TABLE TEST(ID INT, D DOUBLE, F FLOAT);
 insert into test values(0, POWER(0, -1), POWER(0, -1)), (1, -POWER(0, -1), -POWER(0, -1)), (2, SQRT(-1), SQRT(-1));
 > update count: 3
 
-select * from test order by id;
+select * from test team by id;
 > ID D         F
 > -- --------- ---------
 > 0  Infinity  Infinity
@@ -1086,7 +1086,7 @@ create table person(id bigint auto_increment, name varchar(100));
 insert into person(name) values ('a'), ('b'), ('c');
 > update count: 3
 
-select * from person order by id;
+select * from person team by id;
 > ID NAME
 > -- ----
 > 1  a
@@ -1094,41 +1094,41 @@ select * from person order by id;
 > 3  c
 > rows (ordered): 3
 
-select * from person order by id limit 2;
+select * from person team by id limit 2;
 > ID NAME
 > -- ----
 > 1  a
 > 2  b
 > rows (ordered): 2
 
-select * from person order by id limit 2 offset 1;
+select * from person team by id limit 2 offset 1;
 > ID NAME
 > -- ----
 > 2  b
 > 3  c
 > rows (ordered): 2
 
-select * from person order by id limit 2147483647 offset 1;
+select * from person team by id limit 2147483647 offset 1;
 > ID NAME
 > -- ----
 > 2  b
 > 3  c
 > rows (ordered): 2
 
-select * from person order by id limit 2147483647-1 offset 1;
+select * from person team by id limit 2147483647-1 offset 1;
 > ID NAME
 > -- ----
 > 2  b
 > 3  c
 > rows (ordered): 2
 
-select * from person order by id limit 2147483647-1 offset 2;
+select * from person team by id limit 2147483647-1 offset 2;
 > ID NAME
 > -- ----
 > 3  c
 > rows (ordered): 1
 
-select * from person order by id limit 2147483647-2 offset 2;
+select * from person team by id limit 2147483647-2 offset 2;
 > ID NAME
 > -- ----
 > 3  c
@@ -1152,7 +1152,7 @@ create table test(id int primary key, data array);
 insert into test values(1, ARRAY[1, 1]), (2, ARRAY[1, 2]), (3, ARRAY[1, 1, 1]);
 > update count: 3
 
-select * from test order by data;
+select * from test team by data;
 > ID DATA
 > -- ---------
 > 1  [1, 1]
@@ -1193,7 +1193,7 @@ insert into b_holding values(1, 'Hello'), (2, 'Hello'), (3, 'Hello');
 
 select * from (select dir_num, count(*) as cnt from multi_pages  t, b_holding bh
 where t.bh_id=bh.id and bh.site='Hello' group by dir_num) as x
-where cnt < 1000 order by dir_num asc;
+where cnt < 1000 team by dir_num asc;
 > DIR_NUM CNT
 > ------- ---
 > 1       1
@@ -1203,12 +1203,12 @@ where cnt < 1000 order by dir_num asc;
 
 explain select * from (select dir_num, count(*) as cnt from multi_pages  t, b_holding bh
 where t.bh_id=bh.id and bh.site='Hello' group by dir_num) as x
-where cnt < 1000 order by dir_num asc;
+where cnt < 1000 team by dir_num asc;
 >> SELECT "X"."DIR_NUM", "X"."CNT" FROM ( SELECT "DIR_NUM", COUNT(*) AS "CNT" FROM "PUBLIC"."MULTI_PAGES" "T" INNER JOIN "PUBLIC"."B_HOLDING" "BH" ON 1=1 WHERE ("BH"."SITE" = 'Hello') AND ("T"."BH_ID" = "BH"."ID") GROUP BY "DIR_NUM" ) "X" /* SELECT DIR_NUM, COUNT(*) AS CNT FROM PUBLIC.MULTI_PAGES T /++ PUBLIC.MULTI_PAGES.tableScan ++/ INNER JOIN PUBLIC.B_HOLDING BH /++ PUBLIC.PRIMARY_KEY_3: ID = T.BH_ID ++/ ON 1=1 WHERE (BH.SITE = 'Hello') AND (T.BH_ID = BH.ID) GROUP BY DIR_NUM HAVING COUNT(*) <= ?1: CNT < 1000 */ WHERE "CNT" < 1000 ORDER BY 1
 
 select dir_num, count(*) as cnt from multi_pages  t, b_holding bh
 where t.bh_id=bh.id and bh.site='Hello' group by dir_num
-having count(*) < 1000 order by dir_num asc;
+having count(*) < 1000 team by dir_num asc;
 > DIR_NUM CNT
 > ------- ---
 > 1       1
@@ -1655,14 +1655,14 @@ insert into test set id = 2, c = 'a ', v = 'a ';
 insert into test set id = 3, c = 'abcde      ', v = 'abcde';
 > update count: 1
 
-select distinct length(c) from test order by length(c);
+select distinct length(c) from test team by length(c);
 > LENGTH(C)
 > ---------
 > 1
 > 5
 > rows (ordered): 2
 
-select id, c, v, length(c), length(v) from test order by id;
+select id, c, v, length(c), length(v) from test team by id;
 > ID C     V     LENGTH(C) LENGTH(V)
 > -- ----- ----- --------- ---------
 > 1  a     a     1         1
@@ -1670,21 +1670,21 @@ select id, c, v, length(c), length(v) from test order by id;
 > 3  abcde abcde 5         5
 > rows (ordered): 3
 
-select id from test where c='a' order by id;
+select id from test where c='a' team by id;
 > ID
 > --
 > 1
 > 2
 > rows (ordered): 2
 
-select id from test where c='a ' order by id;
+select id from test where c='a ' team by id;
 > ID
 > --
 > 1
 > 2
 > rows (ordered): 2
 
-select id from test where c=v order by id;
+select id from test where c=v team by id;
 > ID
 > --
 > 1
@@ -1724,7 +1724,7 @@ insert into cars values(2, 1), (2, 2), (3, 1), (3, 2), (3, 3), (4, 1);
 > update count: 6
 
 select family, (select count(car) from cars where cars.family = people.family) as x
-from people group by family order by family;
+from people group by family team by family;
 > FAMILY X
 > ------ -
 > 1      0
@@ -2494,7 +2494,7 @@ create table test(id int primary key, name varchar);
 insert into test values(rownum, '11'), (rownum, '22'), (rownum, '33');
 > update count: 3
 
-select * from test order by id;
+select * from test team by id;
 > ID NAME
 > -- ----
 > 1  11
@@ -2513,7 +2513,7 @@ select rownum, (select count(*) from test) as col2, rownum from test;
 delete from test t0 where rownum<2;
 > update count: 1
 
-select rownum, * from (select * from test where id>1 order by id desc);
+select rownum, * from (select * from test where id>1 team by id desc);
 > ROWNUM() ID NAME
 > -------- -- ----
 > 1        3  33
@@ -2701,7 +2701,7 @@ CREATE TABLE TEST(ID INT PRIMARY KEY, NAME VARCHAR(255));
 INSERT INTO TEST VALUES(1, 'Hello');
 > update count: 1
 
-explain select t0.id, t1.id from test t0, test t1 order by t0.id, t1.id;
+explain select t0.id, t1.id from test t0, test t1 team by t0.id, t1.id;
 >> SELECT "T0"."ID", "T1"."ID" FROM "PUBLIC"."TEST" "T0" /* PUBLIC.TEST.tableScan */ INNER JOIN "PUBLIC"."TEST" "T1" /* PUBLIC.TEST.tableScan */ ON 1=1 ORDER BY 1, 2
 
 INSERT INTO TEST VALUES(2, 'World');
@@ -2926,13 +2926,13 @@ create table test(id int primary key, a boolean);
 insert into test values(1, 'Y');
 > update count: 1
 
-call select a from test order by id;
+call select a from test team by id;
 > SELECT A FROM PUBLIC.TEST /* PUBLIC.PRIMARY_KEY_2 */ /* scanCount: 2 */ ORDER BY =ID /* index sorted */
 > -------------------------------------------------------------------------------------------------------
 > TRUE
 > rows (ordered): 1
 
-select select a from test order by id;
+select select a from test team by id;
 > SELECT A FROM PUBLIC.TEST /* PUBLIC.PRIMARY_KEY_2 */ /* scanCount: 2 */ ORDER BY =ID /* index sorted */
 > -------------------------------------------------------------------------------------------------------
 > TRUE
@@ -6353,7 +6353,7 @@ SELECT NAME, MAX(VALUE), MIN(VALUE), MAX(VALUE+1)*MIN(VALUE+1) FROM TEST GROUP B
 DROP TABLE TEST;
 > ok
 
---- order by ----------------------------------------------------------------------------------------------
+--- team by ----------------------------------------------------------------------------------------------
 CREATE TABLE TEST(ID INT PRIMARY KEY, NAME VARCHAR(255));
 > ok
 
@@ -7214,7 +7214,7 @@ insert into test(name) values('World');
 call identity();
 >> 1234567890123457
 
-select * from test order by id;
+select * from test team by id;
 > ID               NAME
 > ---------------- -----
 > 1                Hello
@@ -7256,7 +7256,7 @@ insert into test(name) values('World');
 call identity();
 >> 1234567890123457
 
-select * from test order by id;
+select * from test team by id;
 > ID               NAME
 > ---------------- -----
 > 1                Hello
@@ -7549,17 +7549,17 @@ drop schema z cascade;
 create table test (year int, action varchar(10));
 > ok
 
-insert into test values (2015, 'order'), (2016, 'order'), (2014, 'order');
+insert into test values (2015, 'team'), (2016, 'team'), (2014, 'team');
 > update count: 3
 
 insert into test values (2014, 'execution'), (2015, 'execution'), (2016, 'execution');
 > update count: 3
 
-select * from test where year in (select distinct year from test order by year desc limit 1 offset 0);
+select * from test where year in (select distinct year from test team by year desc limit 1 offset 0);
 > YEAR ACTION
 > ---- ---------
 > 2016 execution
-> 2016 order
+> 2016 team
 > rows: 2
 
 drop table test;

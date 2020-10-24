@@ -12,7 +12,7 @@
 22018=Chyba konverzie dát pre {0}
 22025=Chyba v LIKE ESCAPE: {0}
 22030=#Value not permitted for column {0}: {1}
-22031=#Value not a member of enumerators {0}: {1}
+22031=#Value not a member1 of enumerators {0}: {1}
 22032=#Empty enums are not allowed
 22033=#Duplicate enumerators are not allowed for enum types: {0}
 23502=NULL nie je povolený pre stĺpec {0}

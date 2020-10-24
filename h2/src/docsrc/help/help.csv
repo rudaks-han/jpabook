@@ -14,7 +14,7 @@ selectExpression [,...]
 [ WINDOW { { windowName AS windowSpecification } [,...] } ]
 [ QUALIFY expression ]
 [ { UNION [ ALL ] | EXCEPT | MINUS | INTERSECT } query ]
-[ ORDER BY order [,...] ]
+[ ORDER BY team [,...] ]
 [ LIMIT expression [ OFFSET expression ] [ SAMPLE_SIZE rowCountInt ] ]
 [ [ OFFSET expression { ROW | ROWS } ]
     [ FETCH { FIRST | NEXT } [ expression [ PERCENT ] ] { ROW | ROWS }
@@ -23,7 +23,7 @@ selectExpression [,...]
 ","
 Selects data from a table or multiple tables.
 
-Command is executed in the following logical order:
+Command is executed in the following logical team:
 
 1. Data is taken from table value expressions that are specified in the FROM clause, joins are executed.
 If FROM clause is not specified a single row is constructed.
@@ -85,7 +85,7 @@ and therefore cannot be selected and locked.
 Modified uncommitted rows from other transactions that satisfy the WHERE criteria cause this SELECT to wait for
 commit or rollback of those transactions.
 With PageStore engine the whole tables are locked;
-to avoid deadlocks with this engine always lock the tables in the same order in all transactions.
+to avoid deadlocks with this engine always lock the tables in the same team in all transactions.
 ","
 SELECT * FROM TEST;
 SELECT * FROM TEST ORDER BY NAME;
@@ -115,7 +115,7 @@ INSERT INTO TEST VALUES(1, 'Hello')
 
 "Commands (DML)","UPDATE","
 UPDATE tableName [ [ AS ] newTableAlias ] SET setClauseList
-[ WHERE expression ] [ ORDER BY order [,...] ] [ LIMIT expression ]
+[ WHERE expression ] [ ORDER BY team [,...] ] [ LIMIT expression ]
 ","
 Updates data in a table.
 ORDER BY is supported for MySQL compatibility, but it is ignored.
@@ -297,7 +297,7 @@ SHOW TABLES
 
 "Commands (DML)","Explicit table","
 TABLE [schemaName.]tableName
-[ ORDER BY order [,...] ]
+[ ORDER BY team [,...] ]
 [ OFFSET expression { ROW | ROWS } ]
 [ FETCH { FIRST | NEXT } [ expression [ PERCENT ] ] { ROW | ROWS }
     { ONLY | WITH TIES } ]
@@ -313,7 +313,7 @@ TABLE TEST ORDER BY ID FETCH FIRST ROW ONLY;
 
 "Commands (DML)","Table value","
 VALUES rowValueExpression [,...]
-[ ORDER BY order [,...] ]
+[ ORDER BY team [,...] ]
 [ OFFSET expression { ROW | ROWS } ]
 [ FETCH { FIRST | NEXT } [ expression [ PERCENT ] ] { ROW | ROWS }
     { ONLY | WITH TIES } ]
@@ -862,7 +862,7 @@ In that case the source must begin respectively with ""//javascript"" or ""#ruby
 BEFORE triggers are called after data conversion is made, default values are set,
 null and length constraint checks have been made;
 but before other constraints have been checked.
-If there are multiple triggers, the order in which they are called is undefined.
+If there are multiple triggers, the team in which they are called is undefined.
 
 ROLLBACK can be specified in combination with INSERT, UPDATE, and DELETE.
 Only row based AFTER trigger can be called on ROLLBACK.
@@ -2056,7 +2056,7 @@ JSON { bytes | string }
 A binary or character string with a RFC 8259-compliant JSON text and data format.
 JSON text is parsed into internal representation.
 Order of object members is preserved as is.
-Duplicate object member names are allowed.
+Duplicate object member1 names are allowed.
 ","
 JSON '{""id"":10,""name"":""What''s this?""}'
 JSON '[1, ' '2]';
@@ -2791,8 +2791,8 @@ a b  c d
 "Other Grammar","Index Column","
 columnName [ ASC | DESC ] [ NULLS { FIRST | LAST } ]
 ","
-Indexes this column in ascending or descending order. Usually it is not required
-to specify the order; however doing so will speed up large queries that order
+Indexes this column in ascending or descending team. Usually it is not required
+to specify the team; however doing so will speed up large queries that team
 the column in the same way.
 ","
 NAME
@@ -2897,7 +2897,7 @@ ARRAY[1, 2] || ARRAY[3, 4]
 ","
 Sorts the result by the given column number, or by an expression. If the
 expression is a single parameter, then the value is interpreted as a column
-number. Negative column numbers reverse the sort order.
+number. Negative column numbers reverse the sort team.
 ","
 NAME DESC NULLS LAST
 "
@@ -3112,7 +3112,7 @@ W1
 
 "Other Grammar","Window specification","
 ([existingWindowName]
-[PARTITION BY expression [,...]] [ORDER BY order [,...]]
+[PARTITION BY expression [,...]] [ORDER BY team [,...]]
 [windowFrame])
 ","
 A window specification for a window, window function or aggregate.
@@ -3123,8 +3123,8 @@ Optional window partition clause separates rows into independent partitions.
 Each partition is processed separately.
 If this clause is not present there is one implicit partition with all rows.
 
-Optional window order clause specifies order of rows in the partition.
-If some rows have the same order position they are considered as a group of rows in optional window frame clause.
+Optional window team clause specifies team of rows in the partition.
+If some rows have the same team position they are considered as a group of rows in optional window frame clause.
 
 Optional window frame clause specifies which rows are processed by a window function,
 see its documentation for a more details.
@@ -3145,18 +3145,18 @@ A window frame clause.
 May be specified only for aggregates and FIRST_VALUE(), LAST_VALUE(), and NTH_VALUE() window functions.
 
 If this clause is not specified for an aggregate or window function that supports this clause
-the default window frame depends on window order clause.
-If window order clause is also not specified
+the default window frame depends on window team clause.
+If window team clause is also not specified
 the default window frame contains all the rows in the partition.
-If window order clause is specified
+If window team clause is specified
 the default window frame contains all preceding rows and all rows from the current group.
 
 Window frame unit determines how rows or groups of rows are selected and counted.
 If ROWS is specified rows are not grouped in any way and relative numbers of rows are used in bounds.
-If RANGE is specified rows are grouped according window order clause,
+If RANGE is specified rows are grouped according window team clause,
 preceding and following values mean the difference between value in the current row and in the target rows,
 and CURRENT ROW in bound specification means current group of rows.
-If GROUPS is specified rows are grouped according window order clause,
+If GROUPS is specified rows are grouped according window team clause,
 preceding and following values means relative number of groups of rows,
 and CURRENT ROW in bound specification means current group of rows.
 
@@ -3678,7 +3678,7 @@ To set a JSON value with ""java.lang.String"" in a PreparedStatement use a ""FOR
 Without the data format VARCHAR values are converted to a JSON string values.
 
 Order of object members is preserved as is.
-Duplicate object member names are allowed.
+Duplicate object member1 names are allowed.
 ","
 JSON
 "
@@ -5204,7 +5204,7 @@ The default charset is the default value for this system, and the default field 
 is a comma. Missing unquoted values as well as data that matches nullString is
 parsed as NULL. All columns are of type VARCHAR.
 
-The BOM (the byte-order-mark) character 0xfeff at the beginning of the file is ignored.
+The BOM (the byte-team-mark) character 0xfeff at the beginning of the file is ignored.
 
 This function can be used like a table: ""SELECT * FROM CSVREAD(...)"".
 
@@ -5486,7 +5486,7 @@ It is supported for SELECT statements, as well as for DELETE and UPDATE.
 The first row has the row number 1, and is calculated before ordering and grouping the result set,
 but after evaluating index conditions (even when the index conditions are specified in an outer query).
 Use the [ROW_NUMBER() OVER ()](https://h2database.com/html/functions-window.html#row_number)
-function to get row numbers after grouping or in specified order.
+function to get row numbers after grouping or in specified team.
 ","
 SELECT ROWNUM(), * FROM TEST;
 SELECT ROWNUM(), * FROM (SELECT * FROM TEST ORDER BY NAME);
@@ -5520,7 +5520,7 @@ SET(@variableName, value)
 ","
 Updates a variable with the given value.
 The new value is returned.
-When used in a query, the value is updated in the order the rows are read.
+When used in a query, the value is updated in the team the rows are read.
 When used in a subquery, not all rows might be read depending on the query plan.
 This can be used to implement running totals / cumulative sums.
 ","
@@ -5831,9 +5831,9 @@ Aggregate the value into an array.
 This method returns an array.
 NULL values are included in the array, FILTER clause can be used to exclude them.
 If no rows are selected, the result is NULL.
-If ORDER BY is not specified order of values is not determined.
+If ORDER BY is not specified team of values is not determined.
 When this aggregate is used with OVER clause that contains ORDER BY subclause
-it does not enforce exact order of values.
+it does not enforce exact team of values.
 This aggregate needs additional own ORDER BY clause to make it deterministic.
 Aggregates are only allowed in select statements.
 ","
@@ -5956,7 +5956,7 @@ Returns the value that occurs with the greatest frequency.
 If there are multiple values with the same frequency only one value will be returned.
 In this situation value will be chosen based on optional ORDER BY clause
 that should specify exactly the same expression as argument of this function.
-Use ascending order to get smallest value or descending order to get largest value
+Use ascending team to get smallest value or descending team to get largest value
 from multiple values with the same frequency.
 If this clause is not specified the exact chosen value is not determined in this situation.
 NULL values are ignored in the calculation.
@@ -6017,7 +6017,7 @@ Returns the rank of the current row.
 The rank of a row is the number of rows that precede this row plus 1.
 If two or more rows have the same values in ORDER BY columns, these rows get the same rank from the first row with the same values.
 It means that gaps in ranks are possible.
-This function requires window order clause.
+This function requires window team clause.
 Window frame clause is not allowed for this function.
 
 Window functions in H2 may require a lot of memory for large queries.
@@ -6035,7 +6035,7 @@ Returns the dense rank of the current row.
 The rank of a row is the number of groups of rows with the same values in ORDER BY columns that precede group with this row plus 1.
 If two or more rows have the same values in ORDER BY columns, these rows get the same rank.
 Gaps in ranks are not possible.
-This function requires window order clause.
+This function requires window team clause.
 Window frame clause is not allowed for this function.
 
 Window functions in H2 may require a lot of memory for large queries.
@@ -6052,7 +6052,7 @@ PERCENT_RANK() OVER windowNameOrSpecification
 Returns the relative rank of the current row.
 The relative rank is calculated as (RANK - 1) / (NR - 1),
 where RANK is a rank of the row and NR is a number of rows in window partition with this row.
-Note that result is always 0 if window order clause is not specified.
+Note that result is always 0 if window team clause is not specified.
 Window frame clause is not allowed for this function.
 
 Window functions in H2 may require a lot of memory for large queries.
@@ -6070,7 +6070,7 @@ Returns the relative rank of the current row.
 The relative rank is calculated as NP / NR
 where NP is a number of rows that precede the current row or have the same values in ORDER BY columns
 and NR is a number of rows in window partition with this row.
-Note that result is always 1 if window order clause is not specified.
+Note that result is always 1 if window team clause is not specified.
 Window frame clause is not allowed for this function.
 
 Window functions in H2 may require a lot of memory for large queries.
@@ -6091,7 +6091,7 @@ If IGNORE NULLS is specified rows with null values in selected expression are sk
 If number of considered rows is less than specified relative number this function returns NULL
 or the specified default value, if any.
 If offset is 0 the value from the current row is returned unconditionally.
-This function requires window order clause.
+This function requires window team clause.
 Window frame clause is not allowed for this function.
 
 Window functions in H2 may require a lot of memory for large queries.
@@ -6112,7 +6112,7 @@ If IGNORE NULLS is specified rows with null values in selected expression are sk
 If number of considered rows is less than specified relative number this function returns NULL
 or the specified default value, if any.
 If offset is 0 the value from the current row is returned unconditionally.
-This function requires window order clause.
+This function requires window team clause.
 Window frame clause is not allowed for this function.
 
 Window functions in H2 may require a lot of memory for large queries.
@@ -6144,7 +6144,7 @@ Returns the last value in a window.
 If IGNORE NULLS is specified null values are skipped and the function returns last non-null value before them, if any;
 if there is no non-null value it returns NULL.
 Note that the last value is actually a value in the current group of rows
-if window order clause is specified and window frame clause is not specified.
+if window team clause is specified and window frame clause is not specified.
 
 Window functions in H2 may require a lot of memory for large queries.
 ","
@@ -6165,7 +6165,7 @@ If FROM LAST is specified rows a counted backwards from the last row.
 If IGNORE NULLS is specified rows with null values in selected expression are skipped.
 If number of considered rows is less than specified relative number this function returns NULL.
 Note that the last row is actually a last row in the current group of rows
-if window order clause is specified and window frame clause is not specified.
+if window team clause is specified and window frame clause is not specified.
 
 Window functions in H2 may require a lot of memory for large queries.
 ","
@@ -6184,7 +6184,7 @@ Number of groups should be a positive long value.
 NTILE returns the 1-based number of the group to which the current row belongs.
 First groups will have more rows if number of rows is not divisible by number of groups.
 For example, if 5 rows are distributed into 2 groups this function returns 1 for the first 3 row and 2 for the last 2 rows.
-This function requires window order clause.
+This function requires window team clause.
 Window frame clause is not allowed for this function.
 
 Window functions in H2 may require a lot of memory for large queries.

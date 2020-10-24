@@ -12,7 +12,7 @@
 22018=データ変換中にエラーが発生しました {0}
 22025=LIKE ESCAPE にエラーがあります: {0}
 22030=#Value not permitted for column {0}: {1}
-22031=#Value not a member of enumerators {0}: {1}
+22031=#Value not a member1 of enumerators {0}: {1}
 22032=#Empty enums are not allowed
 22033=#Duplicate enumerators are not allowed for enum types: {0}
 23502=列 {0} にはnull値が許されていません
@@ -102,7 +102,7 @@
 90065=セーブポイントに名前を設定しました
 90066=プロパティ {0} が重複しています
 90067=接続が壊れています: {0}
-90068=order by 対象の式 {0} は、結果リストに含まれる必要があります
+90068=team by 対象の式 {0} は、結果リストに含まれる必要があります
 90069=ロール {0} はすでに存在します
 90070=ロール {0} が見つかりません
 90071=ユーザ、またはロール {0} が見つかりません

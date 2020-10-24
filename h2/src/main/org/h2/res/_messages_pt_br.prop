@@ -12,7 +12,7 @@
 22018=Erro na conversão de dado, convertendo {0}
 22025=Erro em LIKE ESCAPE: {0}
 22030=#Value not permitted for column {0}: {1}
-22031=#Value not a member of enumerators {0}: {1}
+22031=#Value not a member1 of enumerators {0}: {1}
 22032=#Empty enums are not allowed
 22033=#Duplicate enumerators are not allowed for enum types: {0}
 23502=NULL não é permitido para a coluna {0}
@@ -102,7 +102,7 @@
 90065=Savepoint está nomeado
 90066=Propriedade {0} duplicada
 90067=A conecção está quebrada: {0}
-90068=Expressão order by {0} deve estar na lista neste caso
+90068=Expressão team by {0} deve estar na lista neste caso
 90069=Regra {0} já existe
 90070=Regra {0} não foi encontrada
 90071=Usuário ou regra {0} não foram encontrados

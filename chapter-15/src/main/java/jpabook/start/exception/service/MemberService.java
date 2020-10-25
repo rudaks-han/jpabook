@@ -1,8 +1,8 @@
-package jpabook.start.service;
+package jpabook.start.exception.service;
 
-import jpabook.start.jpo.Member;
-import jpabook.start.repository.MemberRepository;
-import jpabook.start.repository.NoResultExceptionTestRepository;
+import jpabook.start.exception.jpo.member.Member;
+import jpabook.start.exception.repository.MemberRepository;
+import jpabook.start.exception.repository.NoResultExceptionTestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package jpabook.start.repository;
+package jpabook.start.exception.repository;
 
-import jpabook.start.jpo.Member;
+import jpabook.start.exception.jpo.member.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

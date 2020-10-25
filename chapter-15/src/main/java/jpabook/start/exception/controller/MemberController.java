@@ -1,7 +1,7 @@
-package jpabook.start.controller;
+package jpabook.start.exception.controller;
 
-import jpabook.start.jpo.Member;
-import jpabook.start.service.MemberService;
+import jpabook.start.exception.jpo.member.Member;
+import jpabook.start.exception.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

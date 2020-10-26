@@ -1,4 +1,4 @@
-package jpabook.start;
+package jpabook.start.mapping;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,6 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@org.hibernate.annotations.DynamicUpdate
 @Table(name = "member")
 public class Member {
 

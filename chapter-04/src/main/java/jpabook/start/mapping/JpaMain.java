@@ -1,4 +1,4 @@
-package jpabook.start;
+package jpabook.start.mapping;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -35,16 +35,11 @@ public class JpaMain {
         member.setAge(null);
 
         em.persist(member);
-        em.clear();
-
-        member = em.merge(member);
-
-        member.setAge(3);
 
         Member findMember = em.find(Member.class, id);
         System.out.println("findMember : " + findMember.toString());
 
-        List<Member> members = em.createQuery("select m from Member m", Member.class)
+        List<Member> members = em.createQuery("select m from Member2 m", Member.class)
                 .getResultList();
 
         System.out.println("members.size: " + members.size());

@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class TwoWayExample {
+public class NonOwnerExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -16,7 +16,6 @@ public class TwoWayExample {
         try {
             tx.begin(); //트랜잭션 시작
             testSave(em);  //비즈니스 로직
-            query(em);
             tx.commit();//트랜잭션 커밋
         } catch (Exception e) {
             e.printStackTrace();
@@ -29,25 +28,13 @@ public class TwoWayExample {
     }
 
     public static void testSave(EntityManager em) {
-        Team2 team = new Team2("team1", "팀1");
-        em.persist(team);
 
         Member2 member1 = new Member2("member1", "회원1");
-        member1.setTeam(team);
         em.persist(member1);
 
-        Member2 member2 = new Member2("member2", "회원2");
-        member2.setTeam(team);
-        em.persist(member2);
+        Team2 team = new Team2("team1", "팀1");
+        team.getMembers().add(member1);
+        em.persist(team);
 
-    }
-
-    public static void query(EntityManager em) {
-        Team2 team = em.find(Team2.class, "team1");
-        System.out.println("member size: " + team.getMembers().size());
-
-        for (Member2 member: team.getMembers()) {
-            System.out.println("id : " + member.getId() + ", username: " + member.getUsername() + " ,teamName: " + member.getTeam().getName());
-        }
     }
 }

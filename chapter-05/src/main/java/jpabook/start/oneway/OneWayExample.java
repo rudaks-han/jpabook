@@ -35,7 +35,7 @@ public class OneWayExample {
         Team1 team = new Team1("team1", "팀1");
         em.persist(team);
 
-        Member1 member1 = new Member1("member1", "회원1", team);
+        Member1 member1 = new Member1("member1", "회원1");
         member1.setTeam(team);
         em.persist(member1);
 
@@ -51,21 +51,25 @@ public class OneWayExample {
                 .setParameter("teamName", "팀1")
                 .getResultList();
 
-        for (Member1 member1 : resultList) {
-            System.out.println("query: " + member1.getUsername());
+        for (Member1 member : resultList) {
+            System.out.println("name: " + member.getUsername());
         }
+
+        resultList.stream()
+            .map(member1 -> "name : " + member1.getUsername())
+            .forEach(System.out::println);
     }
 
     public static void update(EntityManager em) {
         Team1 team = new Team1("team2", "팀2");
         em.persist(team);
 
-        Member1 member1 = em.find(Member1.class, "member1");
-        member1.setTeam(team);
+        Member1 member = em.find(Member1.class, "member1");
+        member.setTeam(team);
     }
 
     public static void delete(EntityManager em) {
-        Member1 member1 = em.find(Member1.class, "member1");
-        member1.setTeam(null);
+        Member1 member = em.find(Member1.class, "member1");
+        member.setTeam(null);
     }
 }

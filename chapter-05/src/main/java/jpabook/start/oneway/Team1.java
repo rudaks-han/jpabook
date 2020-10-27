@@ -15,7 +15,6 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Team1 {
     @Id
-    //@Column(name = "TEAM_ID")
     private String id;
 
     private String name;

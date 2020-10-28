@@ -1,12 +1,15 @@
-package jpabook.start.onetoonetwoway;
+package jpabook.start.onetooneprimarytwoway;
 
-import jpabook.start.onetooneoneway.Locker1;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
 
 @Entity
 @Getter
@@ -22,9 +25,10 @@ public class Member6 {
 
     @OneToOne
     @JoinColumn(name = "locker_id")
-    private Locker1 locker;
+    private Locker6 locker;
 
-    public Member6(String username) {
+    public Member6(String username, Locker6 locker) {
         this.username = username;
+        this.locker = locker;
     }
 }

@@ -20,6 +20,10 @@ public class Member1 {
     private String username;
 
     @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
     private Team1 team;
+
+    public Member1(String username, Team1 team) {
+        this.username = username;
+        this.team = team;
+    }
 }

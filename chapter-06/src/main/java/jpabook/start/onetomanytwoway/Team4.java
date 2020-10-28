@@ -17,12 +17,13 @@ import java.util.List;
 public class Team4 {
     @Id
     @GeneratedValue
+    @Column(name = "team_id")
     private Long id;
 
     private String name;
 
     @OneToMany
-    @JoinColumn(name = "team_id")
+    @JoinColumn(name = "team_id"/*, insertable = false, updatable = false*/)
     private List<Member4> members = new ArrayList<>();
 
     public Team4(String name) {

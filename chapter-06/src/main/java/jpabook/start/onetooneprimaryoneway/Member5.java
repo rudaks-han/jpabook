@@ -1,4 +1,4 @@
-package jpabook.start.onetooneoneway;
+package jpabook.start.onetooneprimaryoneway;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,9 +21,10 @@ public class Member5 {
 
     @OneToOne
     @JoinColumn(name = "locker_id")
-    private Locker1 locker1;
+    private Locker5 locker;
 
-    public Member5(String username) {
+    public Member5(String username, Locker5 locker) {
         this.username = username;
+        this.locker = locker;
     }
 }

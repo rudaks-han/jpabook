@@ -1,11 +1,14 @@
-package jpabook.start.onetomanytwoway;
+package jpabook.start.onetoonetargettwoway;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class OneToManyTwoWayExample {
+import jpabook.start.onetooneprimarytwoway.Locker6;
+import jpabook.start.onetooneprimarytwoway.Member6;
+
+public class OneToOneTargetTwoWayExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,20 +31,20 @@ public class OneToManyTwoWayExample {
     }
 
     public static void testSave(EntityManager em) {
-        Member4 member1 = new Member4("회원1");
-        Member4 member2 = new Member4("회원2");
+        Locker7 locker1 = new Locker7("락커1");
+        Locker7 locker2 = new Locker7("락커2");
 
-        Team4 team = new Team4("팀1");
-        team.getMembers().add(member1);
-        team.getMembers().add(member2);
+        Member7 member1 = new Member7("회원1", locker1);
+        Member7 member2 = new Member7("회원2", locker2);
 
-        /*member1.setTeam(team);
-        member2.setTeam(team);*/
+        locker1.setMember(member1);
+        locker2.setMember(member2);
 
+        em.persist(locker1);
+        em.persist(locker2);
         em.persist(member1);
         em.persist(member2);
-        em.persist(team);
-
+/*
         em.flush();
         em.clear();
 
@@ -49,7 +52,7 @@ public class OneToManyTwoWayExample {
         System.out.println("teamName: " + findTeam.getName());
 
         Member4 findMember = em.find(Member4.class, 1L);
-        System.out.println("teamName: " + findMember.getTeam());
+        System.out.println("teamName: " + findMember.getTeam());*/
     }
 
 }

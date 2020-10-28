@@ -1,4 +1,4 @@
-package jpabook.start.onetooneoneway;
+package jpabook.start.onetooneprimaryoneway;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,10 +14,14 @@ import javax.persistence.Id;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Locker1 {
+public class Locker5 {
     @Id
     @GeneratedValue
-    private String id;
+    private Long id;
 
     private String name;
+
+    public Locker5(String name) {
+        this.name = name;
+    }
 }

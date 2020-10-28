@@ -38,11 +38,6 @@ public class OneToManyOneWayExample {
         em.persist(member1);
         em.persist(member2);
         em.persist(team);
-
-        // 이 동작이 수행되지 않으면 FK가 설정되어 있지 않은 1차캐시에만 영속화 된 상태이다. SELECT 쿼리로 조회해봤자 list 사이즈 0이다.
-        em.flush();
-        em.clear();
-
     }
 
 }

@@ -20,4 +20,8 @@ public class Team1 {
     private Long id;
 
     private String name;
+
+    public Team1(String name) {
+        this.name = name;
+    }
 }

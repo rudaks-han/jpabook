@@ -1,11 +1,14 @@
-package jpabook.start.onetomanytwoway;
+package jpabook.start.manytoonetwoway;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class OneToManyTwoWayExample {
+import jpabook.start.manytooneoneway.Member1;
+import jpabook.start.manytooneoneway.Team1;
+
+public class ManyToOneTwoWayExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,28 +31,25 @@ public class OneToManyTwoWayExample {
     }
 
     public static void testSave(EntityManager em) {
-        Member4 member1 = new Member4("회원1");
-        Member4 member2 = new Member4("회원2");
+        Team2 team = new Team2("1", "팀1");
+        em.persist(team);
 
-        Team4 team = new Team4("팀1");
-        team.getMembers().add(member1);
-        team.getMembers().add(member2);
-
-        /*member1.setTeam(team);
-        member2.setTeam(team);*/
+        Member2 member1 = new Member2("kmhan", "한경만", team);
+        Member2 member2 = new Member2("jhkim", "김지훈", team);
 
         em.persist(member1);
         em.persist(member2);
-        em.persist(team);
 
+        // 이 동작이 수행되지 않으면 FK가 설정되어 있지 않은 1차캐시에만 영속화 된 상태이다. SELECT 쿼리로 조회해봤자 list 사이즈 0이다.
         em.flush();
         em.clear();
 
-        Team4 findTeam = em.find(Team4.class, 3L);
-        System.out.println("teamName: " + findTeam.getName());
+        Member2 findMember = em.find(Member2.class, "kmhan");
+        System.out.println("member.getTeam().getName(): " + findMember.getTeam().getName());
 
-        Member4 findMember = em.find(Member4.class, 1L);
-        System.out.println("teamName: " + findMember.getTeam());
+        Team2 findTeam = em.find(Team2.class, "1");
+        System.out.println("team.getMembers().size(): " + findTeam.getMembers().size());
+
     }
 
 }

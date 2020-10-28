@@ -33,7 +33,7 @@ public class NonOwnerExample {
         em.persist(member1);
 
         Team2 team = new Team2("team1", "팀1");
-        team.getMembers().add(member1);
+        team.getMembers().add(member1); // 들어가지 않음
         em.persist(team);
 
     }

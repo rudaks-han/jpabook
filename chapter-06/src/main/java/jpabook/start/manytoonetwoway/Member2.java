@@ -22,7 +22,6 @@ public class Member2 {
     private String username;
 
     @ManyToOne
-    @JoinColumn(name = "team_id")
     private Team2 team;
 
     public Member2(String id, String username) {

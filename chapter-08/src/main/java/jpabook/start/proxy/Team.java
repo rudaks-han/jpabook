@@ -1,23 +1,25 @@
-package jpabook.start.mappedsuperclass;
+package jpabook.start.proxy;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
-@Getter
+@Entity
 @NoArgsConstructor
-public abstract class BaseEntity {
+@Getter
+public class Team {
+
     @Id
     @GeneratedValue
     private Long id;
 
     private String name;
 
-    public BaseEntity(String name) {
+    public Team(String name) {
         this.name = name;
     }
+
 }

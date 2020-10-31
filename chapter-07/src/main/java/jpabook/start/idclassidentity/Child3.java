@@ -20,6 +20,7 @@ public class Child3 {
     private Parent3 parent;
 
     @Id
+    @Column(name = "child_id")
     private String childId;
 
     private String name;

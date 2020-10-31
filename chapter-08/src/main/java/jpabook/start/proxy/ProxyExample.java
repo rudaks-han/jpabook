@@ -1,11 +1,11 @@
-package jpabook.start.idclass;
+package jpabook.start.proxy;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class IdClassExample {
+public class ProxyExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,20 +28,34 @@ public class IdClassExample {
     }
 
     public static void testSave(EntityManager em) {
-        Parent parent = new Parent("id1", "id2", "부모이름");
-        em.persist(parent);
 
-        Child child = new Child("1", parent);
-        em.persist(child);
+        Team team = new Team("개발팀");
+        em.persist(team);
+
+        Member member = new Member("kmhan", "한경만", team);
+        em.persist(member);
 
         em.flush();
         em.clear();
 
-        ParentId parentId = new ParentId("id1", "id2");
-        Parent findParent = em.find(Parent.class, parentId);
-        System.out.println(findParent.getName());
+        System.out.println("# execute findMember");
+        Member findMember = em.find(Member.class, "kmhan");
+        System.out.println("# findMember: " + findMember.getName());
 
-        Child findChild = em.find(Child.class, "1");
-        System.out.println(findChild.getParent().getName());
+        System.out.println("# getTeam");
+        findMember.getTeam().getName();
+
+        em.clear();
+
+        System.out.println("# execute getReferenceMember");
+        Member findMember2 = em.getReference(Member.class, "kmhan");
+
+        System.out.println("# getName");
+        System.out.println("member name : " + findMember2.getName()); // getReference는 실제 사용시점에 조회
+
+        boolean isLoad = em.getEntityManagerFactory().getPersistenceUnitUtil().isLoaded(findMember2);
+        System.out.println("isLoad : " + isLoad);
+
     }
+
 }

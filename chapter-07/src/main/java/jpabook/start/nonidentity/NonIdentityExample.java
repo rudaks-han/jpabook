@@ -1,11 +1,11 @@
-package jpabook.start.joined;
+package jpabook.start.nonidentity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class JoinExample1 {
+public class NonIdentityExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,11 +28,13 @@ public class JoinExample1 {
     }
 
     public static void testSave(EntityManager em) {
-        Item item = new Album("rudaks");
-        em.persist(item);
+        Parent5 parent = new Parent5("부모");
+        em.persist(parent);
 
-        Item item2 = new Movie("한경만", "김지훈");
-        em.persist(item2);
+        Child5 child = new Child5("자식1", parent);
+        em.persist(child);
 
+        GrandChild5 grandChild = new GrandChild5("손자", child);
+        em.persist(grandChild);
     }
 }

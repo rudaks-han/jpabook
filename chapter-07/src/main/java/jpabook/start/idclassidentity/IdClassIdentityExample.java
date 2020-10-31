@@ -1,11 +1,11 @@
-package jpabook.start.joined;
+package jpabook.start.idclassidentity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class JoinExample1 {
+public class IdClassIdentityExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,11 +28,13 @@ public class JoinExample1 {
     }
 
     public static void testSave(EntityManager em) {
-        Item item = new Album("rudaks");
-        em.persist(item);
+        Parent3 parent = new Parent3("parent_id", "부모");
+        em.persist(parent);
 
-        Item item2 = new Movie("한경만", "김지훈");
-        em.persist(item2);
+        Child3 child = new Child3(parent, "child_id", "자식");
+        em.persist(child);
 
+        GrandChild3 grandChild = new GrandChild3(child, "grandchild_id", "손자");
+        em.persist(grandChild);
     }
 }

@@ -1,11 +1,11 @@
-package jpabook.start.joined;
+package jpabook.start.embeddedididentity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class JoinExample1 {
+public class EmbeddedIdentityExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,11 +28,19 @@ public class JoinExample1 {
     }
 
     public static void testSave(EntityManager em) {
-        Item item = new Album("rudaks");
-        em.persist(item);
+        Parent4 parent = new Parent4("parent_id", "부모");
+        em.persist(parent);
 
-        Item item2 = new Movie("한경만", "김지훈");
-        em.persist(item2);
+        ChildId4 childId = new ChildId4("parent_id", "child_id1");
+        Child4 child = new Child4(childId, parent, "자식1");
+        em.persist(child);
 
+        ChildId4 childId2 = new ChildId4("parent_id", "child_id2");
+        Child4 child2 = new Child4(childId2, parent, "자식2");
+        em.persist(child2);
+
+        GrandChildId4 grandChildId = new GrandChildId4(childId, "grandchild_id");
+        GrandChild4 grandChild = new GrandChild4(grandChildId, child, "손자");
+        em.persist(grandChild);
     }
 }

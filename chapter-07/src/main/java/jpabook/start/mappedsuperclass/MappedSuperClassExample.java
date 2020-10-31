@@ -1,11 +1,11 @@
-package jpabook.start.joined;
+package jpabook.start.mappedsuperclass;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class JoinExample1 {
+public class MappedSuperClassExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,11 +28,10 @@ public class JoinExample1 {
     }
 
     public static void testSave(EntityManager em) {
-        Item item = new Album("rudaks");
-        em.persist(item);
+        Member member = new Member("한경만", "kmhan@spectra.co.kr");
+        em.persist(member);
 
-        Item item2 = new Movie("한경만", "김지훈");
-        em.persist(item2);
-
+        Seller seller = new Seller("한경만", "과일가게");
+        em.persist(seller);
     }
 }

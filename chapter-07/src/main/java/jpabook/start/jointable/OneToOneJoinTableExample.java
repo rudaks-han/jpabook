@@ -1,11 +1,11 @@
-package jpabook.start.joined;
+package jpabook.start.jointable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class JoinExample1 {
+public class OneToOneJoinTableExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,11 +28,10 @@ public class JoinExample1 {
     }
 
     public static void testSave(EntityManager em) {
-        Item item = new Album("rudaks");
-        em.persist(item);
+        Child6 child = new Child6("자식");
+        em.persist(child);
 
-        Item item2 = new Movie("한경만", "김지훈");
-        em.persist(item2);
-
+        Parent6 parent = new Parent6("부모", child);
+        em.persist(parent);
     }
 }

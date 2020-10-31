@@ -32,6 +32,5 @@ public class EmbeddedIdExample {
         Parent2 parent = new Parent2(parentId2, "name");
 
         em.persist(parent);
-
     }
 }

@@ -1,11 +1,11 @@
-package jpabook.start.joined;
+package jpabook.start.oneentitytomultipletable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class JoinExample1 {
+public class OneEntityToMultitpleTableExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,11 +28,8 @@ public class JoinExample1 {
     }
 
     public static void testSave(EntityManager em) {
-        Item item = new Album("rudaks");
-        em.persist(item);
-
-        Item item2 = new Movie("한경만", "김지훈");
-        em.persist(item2);
+        Board board = new Board("제목", "내용");
+        em.persist(board);
 
     }
 }

@@ -45,10 +45,14 @@ public class ProxyExample {
         System.out.println("# getTeam");
         findMember.getTeam().getName();
 
+        System.err.println("findMember: " + findMember.getClass()); // Member
+        System.err.println("findMember.getTeam(): " + findMember.getTeam().getClass()); // Team$HibernateProxy$8ROLyCGi
+
         em.clear();
 
         System.out.println("# execute getReferenceMember");
         Member findMember2 = em.getReference(Member.class, "kmhan");
+        System.err.println("findMember2: " + findMember2.getClass()); // Member$HibernateProxy$8ROLyCGi
 
         System.out.println("# getName");
         System.out.println("member name : " + findMember2.getName()); // getReference는 실제 사용시점에 조회

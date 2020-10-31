@@ -1,19 +1,21 @@
 package jpabook.start.embedded;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
     private String name;
 
@@ -21,5 +23,13 @@ public class Member {
     private Period workPeriod;
 
     @Embedded
-    private Address address;
+    private Address homeAddress;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "city", column = @Column(name = "company_city")),
+            @AttributeOverride(name = "street", column = @Column(name = "company_address")),
+            @AttributeOverride(name = "zipcode", column = @Column(name = "company_zipcode"))
+    })
+    private Address companyAddress;
 }

@@ -18,8 +18,7 @@ public class TypeQueryExample extends Base {
     }
 
     public static void query(EntityManager em) {
-        TypedQuery<Member> query = em.createQuery("select m from Member m where m.name = :name", Member.class);
-        query.setParameter("name", "루닥스");
+        TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
         List<Member> results = query.getResultList();
 
         System.out.println("----------- result -----------");

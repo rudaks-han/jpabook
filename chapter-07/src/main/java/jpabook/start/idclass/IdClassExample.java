@@ -28,9 +28,20 @@ public class IdClassExample {
     }
 
     public static void testSave(EntityManager em) {
-        Parent parent = new Parent("id1", "id2", "name");
-
+        Parent parent = new Parent("id1", "id2", "부모이름");
         em.persist(parent);
 
+        Child child = new Child("1", parent);
+        em.persist(child);
+
+        em.flush();
+        em.clear();
+
+        ParentId parentId = new ParentId("id1", "id2");
+        Parent findParent = em.find(Parent.class, parentId);
+        System.out.println(findParent.getName());
+
+        Child findChild = em.find(Child.class, "1");
+        System.out.println(findChild.getParent().getName());
     }
 }

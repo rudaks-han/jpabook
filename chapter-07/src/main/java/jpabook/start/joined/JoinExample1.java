@@ -29,8 +29,10 @@ public class JoinExample1 {
 
     public static void testSave(EntityManager em) {
         Item item = new Album("rudaks");
-
         em.persist(item);
+
+        Item item2 = new Movie("한경만", "김지훈");
+        em.persist(item2);
 
     }
 }

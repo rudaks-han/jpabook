@@ -46,7 +46,6 @@ public class OrphanRemovalExample {
         Parent2 parent = em.find(Parent2.class, 1L);
 
         parent.getChildren().remove(0);
-        em.remove(parent);
     }
 
 }

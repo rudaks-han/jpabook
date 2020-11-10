@@ -19,8 +19,7 @@ import java.util.Set;
 public class Member2 {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
     private String name;
 
@@ -35,4 +34,9 @@ public class Member2 {
     @ElementCollection
     @CollectionTable(name = "address", joinColumns = @JoinColumn(name = "member_id"))
     private List<Address2> addressHistory = new ArrayList<>();
+
+    public Member2(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

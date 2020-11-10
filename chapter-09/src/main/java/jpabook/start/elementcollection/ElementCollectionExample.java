@@ -20,7 +20,6 @@ public class ElementCollectionExample {
         try {
             tx.begin(); //트랜잭션 시작
             testSave(em);  //비즈니스 로직
-            query(em);
             tx.commit();//트랜잭션 커밋
         } catch (Exception e) {
             e.printStackTrace();
@@ -33,26 +32,30 @@ public class ElementCollectionExample {
     }
 
     public static void testSave(EntityManager em) {
-        Member2 member = new Member2();
+        Member2 member = new Member2("kmhan", "한경만");
 
-        Address2 address = new Address2("seoul", "seocho", "123-123");
+        Address2 address = new Address2("경기도", "미사대로", "123-123");
         Set<String> favoriteFoods = new HashSet<>();
         favoriteFoods.add("라면");
         favoriteFoods.add("삼겹살");
 
-        List<Address2> addressList = Arrays.asList(
-                address
-        );
+        List<Address2> addressList = Arrays.asList(address);
 
         member.setAddress(address);
         member.setFavoriteFoods(favoriteFoods);
         member.setAddressHistory(addressList);
 
         em.persist(member);
+
+        em.flush();
+        em.clear();
+
+        Member2 findMember = em.find(Member2.class, "kmhan");
+        Address2 findAddress = findMember.getAddress();
+
+        System.out.println(findAddress.getCity());
+
+        Set<String> findFavoriteFoods = findMember.getFavoriteFoods();
+        System.out.println(findFavoriteFoods.size());
     }
-
-    public static void query(EntityManager em) {
-
-    }
-
 }

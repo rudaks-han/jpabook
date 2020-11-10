@@ -1,16 +1,17 @@
 package jpabook.start.embeddedid;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
 @EqualsAndHashCode
-@Embeddable
+//@Embeddable
 public class ParentId2 implements Serializable {
 
     private String id1;

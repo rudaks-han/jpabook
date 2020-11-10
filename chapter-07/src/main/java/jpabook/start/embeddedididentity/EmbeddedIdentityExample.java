@@ -1,11 +1,11 @@
-package jpabook.start.cascade;
+package jpabook.start.embeddedididentity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class CascadeExample {
+public class EmbeddedIdentityExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,23 +28,19 @@ public class CascadeExample {
     }
 
     public static void testSave(EntityManager em) {
-        Child child1 = new Child();
-        Child child2 = new Child();
-
-        Parent parent = new Parent();
-        child1.setParent(parent);
-        child2.setParent(parent);
-
-        parent.getChildren().add(child1);
-        parent.getChildren().add(child2);
-
+        Parent4 parent = new Parent4("parent_id", "부모");
         em.persist(parent);
 
-        em.flush();
-        em.clear();
+        ChildId4 childId = new ChildId4("parent_id", "child_id1");
+        Child4 child = new Child4(childId, parent, "자식1");
+        em.persist(child);
 
-        Parent findParent = em.find(Parent.class, 1L);
-        em.remove(findParent);
+        ChildId4 childId2 = new ChildId4("parent_id", "child_id2");
+        Child4 child2 = new Child4(childId2, parent, "자식2");
+        em.persist(child2);
 
+        GrandChildId4 grandChildId = new GrandChildId4(childId, "grandchild_id");
+        GrandChild4 grandChild = new GrandChild4(grandChildId, child, "손자");
+        em.persist(grandChild);
     }
 }

@@ -1,11 +1,11 @@
-package jpabook.start.cascade;
+package jpabook.start.jointable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class CascadeExample {
+public class OneToOneJoinTableExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,23 +28,10 @@ public class CascadeExample {
     }
 
     public static void testSave(EntityManager em) {
-        Child child1 = new Child();
-        Child child2 = new Child();
+        Child6 child = new Child6("자식");
+        em.persist(child);
 
-        Parent parent = new Parent();
-        child1.setParent(parent);
-        child2.setParent(parent);
-
-        parent.getChildren().add(child1);
-        parent.getChildren().add(child2);
-
+        Parent6 parent = new Parent6("부모", child);
         em.persist(parent);
-
-        em.flush();
-        em.clear();
-
-        Parent findParent = em.find(Parent.class, 1L);
-        em.remove(findParent);
-
     }
 }

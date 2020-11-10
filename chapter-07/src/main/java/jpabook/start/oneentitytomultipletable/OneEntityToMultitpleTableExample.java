@@ -1,11 +1,11 @@
-package jpabook.start.cascade;
+package jpabook.start.oneentitytomultipletable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class CascadeExample {
+public class OneEntityToMultitpleTableExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,23 +28,8 @@ public class CascadeExample {
     }
 
     public static void testSave(EntityManager em) {
-        Child child1 = new Child();
-        Child child2 = new Child();
-
-        Parent parent = new Parent();
-        child1.setParent(parent);
-        child2.setParent(parent);
-
-        parent.getChildren().add(child1);
-        parent.getChildren().add(child2);
-
-        em.persist(parent);
-
-        em.flush();
-        em.clear();
-
-        Parent findParent = em.find(Parent.class, 1L);
-        em.remove(findParent);
+        Board board = new Board("제목", "내용");
+        em.persist(board);
 
     }
 }

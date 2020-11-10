@@ -1,11 +1,11 @@
-package jpabook.start.cascade;
+package jpabook.start.idclassidentity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class CascadeExample {
+public class IdClassIdentityExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,23 +28,13 @@ public class CascadeExample {
     }
 
     public static void testSave(EntityManager em) {
-        Child child1 = new Child();
-        Child child2 = new Child();
-
-        Parent parent = new Parent();
-        child1.setParent(parent);
-        child2.setParent(parent);
-
-        parent.getChildren().add(child1);
-        parent.getChildren().add(child2);
-
+        Parent3 parent = new Parent3("parent_id", "부모");
         em.persist(parent);
 
-        em.flush();
-        em.clear();
+        Child3 child = new Child3(parent, "child_id", "자식");
+        em.persist(child);
 
-        Parent findParent = em.find(Parent.class, 1L);
-        em.remove(findParent);
-
+        GrandChild3 grandChild = new GrandChild3(child, "grandchild_id", "손자");
+        em.persist(grandChild);
     }
 }

@@ -1,11 +1,11 @@
-package jpabook.start.cascade;
+package jpabook.start.nonidentity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class CascadeExample {
+public class NonIdentityExample {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
@@ -28,23 +28,13 @@ public class CascadeExample {
     }
 
     public static void testSave(EntityManager em) {
-        Child child1 = new Child();
-        Child child2 = new Child();
-
-        Parent parent = new Parent();
-        child1.setParent(parent);
-        child2.setParent(parent);
-
-        parent.getChildren().add(child1);
-        parent.getChildren().add(child2);
-
+        Parent5 parent = new Parent5("부모");
         em.persist(parent);
 
-        em.flush();
-        em.clear();
+        Child5 child = new Child5("자식1", parent);
+        em.persist(child);
 
-        Parent findParent = em.find(Parent.class, 1L);
-        em.remove(findParent);
-
+        GrandChild5 grandChild = new GrandChild5("손자", child);
+        em.persist(grandChild);
     }
 }

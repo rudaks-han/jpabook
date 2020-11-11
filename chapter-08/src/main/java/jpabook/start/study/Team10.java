@@ -1,5 +1,6 @@
 package jpabook.start.study;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -14,16 +15,16 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Team {
+public class Team10 {
     @Id
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH}, orphanRemoval = true)
-    private List<Member> members = new ArrayList<>();
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    private List<Member10> members = new ArrayList<>();
 
-    public Team(Long id, String name) {
+    public Team10(Long id, String name) {
         this.id = id;
         this.name = name;
     }

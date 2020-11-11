@@ -8,26 +8,24 @@ import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
-public class Member {
-
+public class Member10 {
     @Id
     private Long id;
 
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "team_id")
-    private Team team;
+    @JoinColumn
+    private Team10 team;
 
-    public Member(Long id, String name) {
+    public Member10(Long id, String name) {
         this.id = id;
         this.name = name;
     }
+
 }

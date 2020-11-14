@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("members")
 public class MemberController {
@@ -17,6 +19,14 @@ public class MemberController {
 
     public void register(Member member) {
         memberService.register(member);
+    }
+
+    @GetMapping
+    public void findAll() {
+        List<Member> members = memberService.findAll();
+
+        members.get(0).getTeam().getName();
+
     }
 
     @GetMapping("{id}")

@@ -1,13 +1,13 @@
 package jpabook.start.service;
 
-import java.util.NoSuchElementException;
-
-import javax.transaction.Transactional;
-
 import jpabook.start.jpo.Team;
 import jpabook.start.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -18,6 +18,10 @@ public class TeamService {
 
     public void register(Team team) {
         teamRepository.save(team);
+    }
+
+    public List<Team> findAll() {
+        return teamRepository.findAll();
     }
 
     public Team find(Long id) {

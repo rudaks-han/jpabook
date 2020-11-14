@@ -1,0 +1,15 @@
+PUT http://localhost:9200/_snapshot/docker-cluster
+content-Type: application/json
+
+{
+  "type": "fs",
+  "settings": {
+    "location": "/tmp/book_backup/search_example",
+    "compress": true
+  }
+}
+###
+GET http://localhost:9200/_snapshot/docker-cluster/_all
+
+###
+POST http://localhost:9200/movie/_search?q=외인

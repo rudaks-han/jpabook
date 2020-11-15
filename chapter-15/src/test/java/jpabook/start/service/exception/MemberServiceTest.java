@@ -35,6 +35,7 @@ public class MemberServiceTest {
 
         Member findMember = memberRepository.findOne(1L);
 
-        Assert.assertEquals(member, findMember);
+        Assert.assertTrue(member == findMember);
+        //Assert.assertTrue(member.getId().equals(findMember.getId()));
     }
 }

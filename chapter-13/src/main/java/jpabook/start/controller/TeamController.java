@@ -20,7 +20,7 @@ public class TeamController {
     public void findAll() {
         List<Team> team = teamService.findAll();
 
-        //team.get(0).getMembers().stream().forEach(member -> System.out.println(member.getName()));
+        team.get(0).getMembers().stream().forEach(member -> System.out.println(member.getName()));
 
     }
 

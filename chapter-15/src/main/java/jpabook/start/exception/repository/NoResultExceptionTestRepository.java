@@ -14,7 +14,7 @@ public class NoResultExceptionTestRepository {
     EntityManager em;
 
     public Member findAllMember() throws NoResultException {
-        return em.createQuery("select m from Member4 m", Member.class)
+        return em.createQuery("select m from Member m", Member.class)
                 .getSingleResult();
     }
 }

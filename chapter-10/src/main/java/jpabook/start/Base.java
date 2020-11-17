@@ -47,6 +47,7 @@ public class Base {
         Member member2 = new Member();
         member2.setName("김지훈");
         member2.setAge(12);
+        member2.setAddress(new Address("incheon", "namgu", "333-111"));
 
         em.persist(member2);
 

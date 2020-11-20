@@ -33,7 +33,7 @@ public class JpqlFetchExample {
         InitData.init(em);
 
         System.out.println("------- jpql fetch -------");
-        List<Member2> fetchMembers = em.createQuery("select m from Member4 m join fetch m.orders", Member2.class)
+        List<Member2> fetchMembers = em.createQuery("select m from Member2 m join fetch m.orders", Member2.class)
                 .getResultList();
     }
 

@@ -21,7 +21,7 @@ public class Member2 {
 
     private String username;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
     public Member2(String username) {

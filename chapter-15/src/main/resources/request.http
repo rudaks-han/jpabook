@@ -1,1 +1,10 @@
-GET http://localhost:8080/members
+GET http://localhost:8881/members
+###
+POST http://localhost:8881/members
+content-Type: application/json
+
+{
+  "id": 11,
+  "name": "루닥스11111111111111111111111"
+}
+

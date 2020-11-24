@@ -16,7 +16,13 @@ public class MemberService {
     private MemberRepository memberRepository;
 
     public void register(Member member) {
-        memberRepository.save(member);
+        try {
+            memberRepository.save(member);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(member);
     }
 
     public Member find(Long id) {

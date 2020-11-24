@@ -7,7 +7,7 @@ import java.util.List;
  * Dynamic Dispatch
  * runtime 시점
  */
-public class DyanmicDispatch {
+public class DynamicDispatch {
     static abstract class Service {
         abstract void run();
     }

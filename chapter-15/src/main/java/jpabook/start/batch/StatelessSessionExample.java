@@ -21,13 +21,13 @@ public class StatelessSessionExample {
         while (scroll.next()) {
             Product p = (Product) scroll.get(0);
             p.setPrice(p.getPrice() + 100);
-            session.update(p);
+            session.update(p); // 직접 update를 호출해야 한다.
         }
 
         tx.commit();
         session.close();
 
-        emf.close(); //엔티티 매니저 팩토리 종료
+        emf.close();
     }
 
 

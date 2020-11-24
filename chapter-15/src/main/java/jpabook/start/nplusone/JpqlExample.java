@@ -38,12 +38,12 @@ public class JpqlExample {
          */
         System.out.println("------- jpql -------");
 
-        List<Member2> members = em.createQuery("select m from Member4 m", Member2.class)
+        List<Member2> members = em.createQuery("select m from Member2 m", Member2.class)
                 .getResultList();
 
-        /*for (Member2 member: members) {
+        for (Member2 member: members) {
             System.out.println("order size : " + member.getOrders().size());
-        }*/
+        }
 
     }
 

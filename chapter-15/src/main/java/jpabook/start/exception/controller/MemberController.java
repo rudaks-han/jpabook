@@ -32,7 +32,7 @@ public class MemberController {
 
         Member member = memberService.find(id);
 
-        System.out.println("--- find Member ---");
-        System.out.println("member : " + member.getName());
+        /*System.out.println("--- find Member ---");
+        System.out.println("member : " + member.getName());*/
     }
 }
